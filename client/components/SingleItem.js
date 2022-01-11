@@ -6,7 +6,7 @@ const item = {
   name: "Cat Tree",
   price: "$3500",
   description: "a cozy tree",
-  imgUrl:
+  imageUrl:
     "https://cdn.vox-cdn.com/thumbor/MjIS9HYCYfMr2Q4s9e3KPI4dRME=/0x0:2100x1457/1200x800/filters:focal(882x561:1218x897)/cdn.vox-cdn.com/uploads/chorus_image/image/58123273/img_gal_3_5_zoom.0.jpg",
 };
 
@@ -15,7 +15,7 @@ export default class SingleItem extends Component {
     const name = item.name;
     const price = item.price;
     const description = item.description;
-    const imgUrl = item.imgUrl;
+    const imgUrl = item.imageUrl;
 
     return (
       <div id="singleItem">
