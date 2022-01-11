@@ -15,3 +15,20 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/',async (req,res,next) =>{
+  try{
+    //Go through JWT and BCRYPT of tokenizing the password before putting it into the database
+  } catch(err){
+    next(err)
+  }
+})
+
+router.get('/:userId', async (req,res,next) => {
+  try{
+      const singleUser = await User.findByPk(req.params.userId);
+      res.json(singleUser);
+  } catch(err){
+      next(err)
+  }
+})
