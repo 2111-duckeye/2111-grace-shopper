@@ -32,7 +32,7 @@ class Routes extends Component {
           </Switch>
         )}
         <Switch>
-          <Route path="/items/:id" component={SingleItem} />
+          <Route path="/products/:productId" component={SingleItem} />
         </Switch>
       </div>
     );
