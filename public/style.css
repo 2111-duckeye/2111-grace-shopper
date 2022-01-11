@@ -10,6 +10,16 @@ label {
   display: block;
 }
 
+/* Navbar */
+nav {
+display: flex;
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 95.18%;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;

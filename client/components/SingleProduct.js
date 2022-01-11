@@ -10,7 +10,7 @@ const item = {
     "https://cdn.vox-cdn.com/thumbor/MjIS9HYCYfMr2Q4s9e3KPI4dRME=/0x0:2100x1457/1200x800/filters:focal(882x561:1218x897)/cdn.vox-cdn.com/uploads/chorus_image/image/58123273/img_gal_3_5_zoom.0.jpg",
 };
 
-export default class SingleItem extends Component {
+export default class SingleProduct extends Component {
   render() {
     const name = item.name;
     const price = item.price;
