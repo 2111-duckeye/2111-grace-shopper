@@ -11,19 +11,19 @@ label {
 }
 
 /* Navbar */
-nav {
+/* nav {
 display: flex;
 position: absolute;
 left: 0%;
 right: 0%;
 top: 0%;
 bottom: 95.18%;
-}
+} */
 
-nav a {
+/* nav a {
   display: inline-block;
   margin: 1em;
-}
+} */
 
 form div {
   margin: 1em;

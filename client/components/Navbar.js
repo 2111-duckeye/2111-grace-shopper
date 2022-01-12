@@ -2,11 +2,15 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, Typography} from "@material-ui/core";
+import { ShoppingCart } from '@material-ui/icons';
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+import useStyles from "../../public/styles"
+
+const Navbar = ({handleClick, isLoggedIn}) => {
+  const classes = useStyles();
+  return (
   <div>
-    {/* <h1>FS-App-Template</h1> */}
-    <nav>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
@@ -23,10 +27,23 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/signup">Sign Up</Link>
         </div>
       )}
-    </nav>
-    <hr />
+    <AppBar position="fixed" className={classes.appBar} color="inherit">
+      <Toolbar>
+        <Typography variant="h6" className={classes.title} color="inherit">
+        Duck Eye
+        </Typography>
+        <div className={classes.grow} />
+        <div className={classes.button}>
+          <IconButton aria-label="Show cart items" color="inherit">
+            <Badge badgeContent={2} color="secondary"></Badge>
+             <ShoppingCart />
+          </IconButton>
+        </div>
+      </Toolbar>
+    </AppBar>
   </div>
-)
+  )
+}
 
 /**
  * CONTAINER
