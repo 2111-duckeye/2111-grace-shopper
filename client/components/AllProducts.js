@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import {Grid} from "@material-ui/core";
+import {Card, CardMedia, CardContent, CardActions, Typography, IconButton } from "@material-ui/core";
+import { AddShoppingCart } from "@material-ui/icons";
+
+import useStyles from '../../public/styles'
 
 const products = [
   {
@@ -29,21 +34,37 @@ const products = [
     price: 439.99,
   },
 ];
-export default class AllProducts extends Component {
-  render() {
+
+const AllProducts = () => {
+    const classes = useStyles();
     return (
-      <div id="allItems">
+      <main className={classes.content}>
+       <Grid container justify="center" spacing={4}>
         {products.map((product) => (
-          <div className="product" key={product.id}>
-            <img
-              src={product.imageUrl}
-              style={{ width: "500px", height: "500px" }}
-            />
-            <h1 className="singleItemName">{product.name}</h1>
-            <div>{product.price}</div>
-          </div>
+          <Grid key={product.id} xs={12} sm={6} md={4} lg={3}>
+            <Card className={classes.root}>
+              <CardMedia className={classes.media} image={product.imageUrl} title={product.name} />
+              <CardContent>
+                <div className={classes.cardContent}>
+                  <Typography variant="h5" gutterBottom>
+                    {product.name}
+                  </Typography>
+                  <Typography variant="h5">
+                    {product.price}
+                  </Typography>
+                </div>
+              </CardContent>
+              <CardActions disableSpacing className={classes.CardActions}>
+                <IconButton aria-label="Add to Card">
+                  <AddShoppingCart />
+                </IconButton>
+              </CardActions>
+            </Card>
+          </Grid>
         ))}
-      </div>
-    );
-  }
+        </Grid>
+      </main>
+  );
 }
+
+  export default AllProducts;
