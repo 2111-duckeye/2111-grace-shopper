@@ -11,6 +11,13 @@ const Cart = require('./models/Cart');
 User.belongsToMany(Product, { through: 'Cart' });
 Product.belongsToMany(User, { through: 'Cart' });
 
+/*
+User.hasOne(Cart);
+Cart.belongsTo(User);
+Cart.hasMany(Product);
+Product.belongsTo(Cart);
+*/
+
 module.exports = {
 	db,
 	models: {
