@@ -5,7 +5,7 @@ import {logout} from '../store'
 import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, Typography} from "@material-ui/core";
 import { ShoppingCart } from '@material-ui/icons';
 
-import useStyles from "../../public/navbarStyles"
+import useStyles from "../../public/navBarStyles"
 
 const Navbar = ({handleClick, isLoggedIn}) => {
   const classes = useStyles();
@@ -18,10 +18,10 @@ const Navbar = ({handleClick, isLoggedIn}) => {
         </Typography>
         <div className={classes.grow} />
         <div className={classes.grow}>
-        {isLoggedIn ? (
+          {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
+          <Link to="/">Home</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
@@ -29,12 +29,11 @@ const Navbar = ({handleClick, isLoggedIn}) => {
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/" style={{ marginRight: 10 }}>Home</Link>
+          <Link to="/login" style={{ marginRight: 10 }}>Login</Link>
+          <Link to="/signup" style={{ marginRight: 10 }}>Sign Up</Link>
         </div>
-      )}
-        </div>
+      )}</div>
         <div className={classes.button}>
           <IconButton aria-label="Show cart items" color="inherit">
             <Badge badgeContent={2} color="secondary"></Badge>
