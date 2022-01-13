@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User, Product} } = require('../server/db')
+const {db, models: {User, Product, Order, Cart_Item} } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -146,8 +146,57 @@ const products = [
 ]
 //name, description, price, imageUrl
 //{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
-const cart = []
-// itemId, Total,
+const orders = [{
+  completed: true,
+  total: 15,
+  userId: 1
+}, {
+  completed: true,
+  total: 5097,
+  userId: 1
+}, {
+  completed: false,
+  total: 35,
+  userId: 2
+}, {
+  completed: false,
+  userId: 1
+}
+]
+
+const cartItems = [
+  {
+    orderId: 1,
+    productId: 20,
+    quantity: 1,
+    total: 15
+  }, {
+    orderId: 2,
+    productId: 4,
+    quantity: 1,
+    total: 5000
+  }, {
+    orderId: 2,
+    productId: 2,
+    quantity: 1,
+    total: 52
+  }, {
+    orderId: 2,
+    productId: 9,
+    quantity: 1,
+    total: 45
+  }, {
+    orderId: 3,
+    productId: 20,
+    quantity: 1,
+    total: 15
+  }, {
+    orderId: 3,
+    productId: 17,
+    quantity: 1,
+    total: 20
+  }
+]
 
 async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
@@ -167,6 +216,16 @@ async function seed() {
   //CREATING PRODUCTS
   await Promise.all(products.map(product => {
     return Product.create(product)
+  }))
+
+  //CREATING ORDERS
+  await Promise.all(orders.map(order => {
+    return Order.create(order)
+  }))
+
+  //CREATING CART ITEMS
+  await Promise.all(cartItems.map(item => {
+    return Cart_Item.create(item)
   }))
 
 
