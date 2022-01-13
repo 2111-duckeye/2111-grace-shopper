@@ -8,17 +8,6 @@ const Order = require('./models/Order')
 const Cart_Item = require('./models/Cart')
 //associations could go here!
 
-// const Cart = db.define('Cart', {
-// 	total: {
-// 		type: Sequelize.DECIMAL(10,2),
-// 		defaultValue: 0
-// 	},
-// 	quantity: {
-// 		type: Sequelize.INTEGER,
-// 		defaultValue: 0
-// 	}
-// });
-
 //Many to Many Relationship
 
 //Order and User relationships
