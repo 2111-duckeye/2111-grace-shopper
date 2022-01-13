@@ -5,7 +5,7 @@ const db = require('./db');
 const User = require('./models/User');
 const Product = require('./models/Product');
 const Order = require('./models/Order')
-const Cart_Item = require('./models/Cart')
+const Cart_Item = require('./models/Cart_Item')
 //associations could go here!
 
 //Many to Many Relationship
@@ -26,6 +26,7 @@ module.exports = {
 	models: {
 		User,
 		Product,
-		Order
+		Order,
+		Cart_Item
 	},
 };
