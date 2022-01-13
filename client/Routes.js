@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import { withRouter, Route, Switch, Redirect, BrowserRouter as Router } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { me } from "./store";
@@ -33,11 +33,11 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
           </Switch>
         )}
-        <Switch>
-          <Route path="/products" component={AllProducts} />
-          <Route path="/products/:productId" component={SingleProduct} />
-        </Switch>
-        <Route path="/cart" exact component={Cart} />
+        <Router>
+          <Route exact path="/" component={AllProducts} />
+          <Route exact path="/products/:productId" exact component={SingleProduct} />
+        </Router>
+          <Route path="/cart" exact component={Cart} />
       </div>
     );
   }
