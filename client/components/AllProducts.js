@@ -45,6 +45,7 @@ const AllProducts = () => {
             <h4>${product.price}</h4>
             <p>{product.description}</p>
             <Link to={`/products/${product.id}`}><button type="button">View Item</button></Link>
+            <button type="button">Add to Cart</button>
           </div>
           </div>
     ))}
