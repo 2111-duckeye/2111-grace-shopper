@@ -1,16 +1,16 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../store'
-import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, Typography} from "@material-ui/core";
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { logout } from '../store'
+import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, Typography } from "@material-ui/core";
 import { ShoppingCart } from '@material-ui/icons';
 
 import useStyles from "../../public/styles"
 
-const Navbar = ({handleClick, isLoggedIn}) => {
+const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
   const classes = useStyles();
   return (
-  <div>
+    <div>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
@@ -27,21 +27,27 @@ const Navbar = ({handleClick, isLoggedIn}) => {
           <Link to="/signup">Sign Up</Link>
         </div>
       )}
-    <AppBar position="fixed" className={classes.appBar} color="inherit">
-      <Toolbar>
-        <Typography variant="h6" className={classes.title} color="inherit">
-        Duck Eye
-        </Typography>
-        <div className={classes.grow} />
-        <div className={classes.button}>
-          <IconButton aria-label="Show cart items" color="inherit">
-            <Badge badgeContent={2} color="secondary"></Badge>
-             <ShoppingCart />
-          </IconButton>
-        </div>
-      </Toolbar>
-    </AppBar>
-  </div>
+      {isAdmin ? (
+        <Link to="/users">Users</Link>
+      ) : (
+        ""
+      )
+      }
+      <AppBar position="fixed" className={classes.appBar} color="inherit">
+        <Toolbar>
+          <Typography variant="h6" className={classes.title} color="inherit">
+            Duck Eye
+          </Typography>
+          <div className={classes.grow} />
+          <div className={classes.button}>
+            <IconButton aria-label="Show cart items" color="inherit">
+              <Badge badgeContent={2} color="secondary"></Badge>
+              <ShoppingCart />
+            </IconButton>
+          </div>
+        </Toolbar>
+      </AppBar>
+    </div>
   )
 }
 
@@ -50,7 +56,8 @@ const Navbar = ({handleClick, isLoggedIn}) => {
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.auth.id
+    isLoggedIn: !!state.auth.id,
+    isAdmin: state.auth.isAdmin
   }
 }
 
