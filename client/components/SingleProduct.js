@@ -9,17 +9,17 @@ class SingleProduct extends Component {
     this.props.fetchProduct(productId)
   }
   render() {
-    const product = this.props.product;
+    const {product} = this.props || {};
 
     return (
-      <main class="container">
-        <div class="left-column">
+      <main className="container">
+        <div className="left-column">
         <img src={product.imageURL} style={{ width: "500px", height: "500px" }} />
         </div>
-        <div class="right-column">
+        <div className="right-column">
         <h1 className="singleItemName">{product.name}</h1>
         <p>{product.description}</p>
-        <div class="product-price">
+        <div className="product-price">
           <span>{product.price}</span>
           <button type="submit">Add to cart</button></div>
         </div>

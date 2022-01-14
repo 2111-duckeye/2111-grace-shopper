@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const Order = require('../db/models/Order');
-const Product = require('../db/models/Product');
+const { Order, Product } = require('../db');
 //const { requireToken, isAdmin } = require('./gatekeepingMiddleware');
 module.exports = router;
 

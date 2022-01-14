@@ -4,15 +4,17 @@ const Product = require('./Product');
 const Order = require('./Order')
 
 const Cart_Item = db.define('Cart_Item', {
-	total: {
-		type: Sequelize.DECIMAL(10,2),
-		defaultValue: 0
-	},
-	quantity: {
-		type: Sequelize.INTEGER,
-		defaultValue: 0
-	}
+    total: {
+        type: Sequelize.DECIMAL(10,2),
+        defaultValue: 0
+    },
+    quantity: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    }
 });
+Order.belongsToMany(Product, { through: Cart_Item });
+Product.belongsToMany(Order, { through: Cart_Item });
 
 Order.belongsToMany(Product, { through: Cart_Item });
 Product.belongsToMany(Order, { through: Cart_Item });

@@ -12,14 +12,15 @@ class AllProducts extends Component {
 
   render(){
     const products = this.props.products || []
+    console.log(products);
   return (
     <div className='container'>
-      {products.map((product) => (
+      {products.map(product => (
         <div className='card' key={product.id}>
           <div className='card-header'>
             <img src={product.imageURL} />
             <h4>{product.name}</h4>
-            <h4>${product.price}</h4>
+            <h4>{`$ ${product.price}`}</h4>
             <p>{product.description}</p>
             <Link to={`/products/${product.id}`}>
               <button type='button'>View Item</button>
