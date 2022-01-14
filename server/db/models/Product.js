@@ -7,7 +7,7 @@ const Product = db.define('product',{
         allowNull: false
     },
     imageURL:{
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         defaultValue: "https://cdn-icons-png.flaticon.com/512/1303/1303440.png"
     },
     description:{

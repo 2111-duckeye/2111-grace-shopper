@@ -24,10 +24,8 @@ Product.belongsTo(Cart);
 */
 module.exports = {
 	db,
-	models: {
-		User,
-		Product,
-		Order,
-		Cart_Item
-	},
+	User,
+	Product,
+	Order,
+	Cart_Item
 };

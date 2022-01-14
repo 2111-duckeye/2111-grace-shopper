@@ -10,8 +10,12 @@ const setProducts = (products) => ({
 //thunks
 export const fetchProducts = () => {
     return async (dispatch) => {
+        try {
         const { data: products } = await axios.get('/api/products');
         dispatch(setProducts(products));
+        } catch (e) {
+            console.log("ERROR FETCHING ALL PRODUCTS", e)
+        }
     }
 }
 

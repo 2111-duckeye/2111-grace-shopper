@@ -1,5 +1,5 @@
 'use strict'
-
+const db = require('../server/db/db');
 const { User, Product, Order, Cart_Item } = require ('../server/db/index');
 
 /**
