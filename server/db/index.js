@@ -14,6 +14,9 @@ const Cart_Item = require('./models/Cart_Item')
 User.hasMany(Order)
 Order.belongsTo(User)
 
+Order.belongsToMany(Product, { through: Cart_Item });
+Product.belongsToMany(Order, { through: Cart_Item });
+
 /*
 User.hasOne(Cart);
 Cart.belongsTo(User);
