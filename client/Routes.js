@@ -23,12 +23,13 @@ class Routes extends Component {
     return (
       <Switch>
         {/*Routes available to all visitors */}
+        <Route path="/order" component={OrderPage} />
         <Route exact path='/' component={AllProducts} />
         <Route exact path='/login' component={Login} />
         <Route path="/products/:productId" component={SingleProduct} />
         {/* <Route path="/cart" exact component={Cart} /> */}
         <Route path="/users" component={Users} />
-      
+
         {isLoggedIn ? (
           <Switch>
             <Route path="/" component={AllProducts} />
