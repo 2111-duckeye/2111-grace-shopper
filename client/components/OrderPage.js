@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { fetchOrders } from '../store/orders'
+import { logout } from '../store';
 
 class OrderPage extends React.Component {
   constructor() {
@@ -30,6 +31,7 @@ class OrderPage extends React.Component {
         {
           orders.length ? <h1>{this.props.user.username}'s Total: {orders[0].total}</h1> : <h1>HELLO ORDER NOT LOADED CHECK</h1>
         }
+        <a href='#' onClick={this.props.handleClick}>Logout</a>
       </div>
     );
   }
@@ -44,7 +46,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadOrders: (userId) => dispatch(fetchOrders(userId))
+    loadOrders: (userId) => dispatch(fetchOrders(userId)),
+    handleClick: () => dispatch(logout())
   }
 }
 
