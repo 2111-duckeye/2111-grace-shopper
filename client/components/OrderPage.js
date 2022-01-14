@@ -28,9 +28,26 @@ class OrderPage extends React.Component {
   render() {
     let orders = [...this.props.orders] || []
     let openOrder = this.props.openOrder || {}
+    let products = this.props.openOrder.products || []
 
     return (
       <div>
+        <h2>Items in Cart:</h2>
+        {
+          products.length ? (
+            <div>
+              <ol>
+                {products.map((product) => {
+                  return (
+                    <li>{product.name}</li>
+                  )
+                })}
+              </ol>
+            </div>
+          ) : (
+            <h2>Nothing in Cart</h2>
+          )
+        }
         {
           openOrder.total ? <h1>{this.props.user.username}'s Total: {openOrder.total}</h1> : <h1>HELLO ORDER NOT LOADED CHECK</h1>
         }
