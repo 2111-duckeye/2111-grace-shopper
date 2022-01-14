@@ -36,3 +36,18 @@ router.get('/user/:userId', async (req, res, next) => {
 	}
 });
 
+router.get('/user/:userId/open/', async (req, res, next) => {
+	try {
+		const order = await Order.findOne({
+      where: {
+				userId: req.params.userId,
+				completed: false
+			}
+    });
+		res.json(order);
+	} catch (err) {
+		next(err);
+	}
+});
+
+

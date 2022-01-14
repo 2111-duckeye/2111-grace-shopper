@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { fetchOrders } from '../store/orders'
+import { fetchOrder } from '../store/openOrder';
 import { logout } from '../store';
 
 class OrderPage extends React.Component {
@@ -18,18 +19,20 @@ class OrderPage extends React.Component {
 
   componentDidUpdate() {
     if(!this.state.loadedUserOrder && this.props.user.id){
+      this.props.loadOpenOrder(this.props.user.id)
       this.props.loadOrders(this.props.user.id)
       this.setState({loadedUserOrder: true})
     }
   }
 
   render() {
-    const orders = this.props.orders || []
+    let orders = [...this.props.orders] || []
+    let openOrder = this.props.openOrder || {}
 
     return (
       <div>
         {
-          orders.length ? <h1>{this.props.user.username}'s Total: {orders[0].total}</h1> : <h1>HELLO ORDER NOT LOADED CHECK</h1>
+          openOrder.total ? <h1>{this.props.user.username}'s Total: {openOrder.total}</h1> : <h1>HELLO ORDER NOT LOADED CHECK</h1>
         }
         <a href='#' onClick={this.props.handleClick}>Logout</a>
       </div>
@@ -40,6 +43,7 @@ class OrderPage extends React.Component {
 const mapState = (state) => {
   return {
     orders: state.orders,
+    openOrder: state.openOrder,
     user: state.auth
   }
 }
@@ -47,6 +51,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadOrders: (userId) => dispatch(fetchOrders(userId)),
+    loadOpenOrder: (userId) => dispatch(fetchOrder(userId)),
     handleClick: () => dispatch(logout())
   }
 }
