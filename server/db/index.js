@@ -20,6 +20,8 @@ Cart.belongsTo(User);
 Cart.hasMany(Product);
 Product.belongsTo(Cart);
 
+
+*/
 module.exports = {
 	db,
 	models: {

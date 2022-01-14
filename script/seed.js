@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User, Product, Order, Cart_Item} } = require('../server/db')
+const { User, Product, Order, Cart_Item } = require ('../server/db/index');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -198,7 +198,7 @@ const cartItems = [
   }
 ]
 
-async function seed() {
+const seed = async () => {
   await db.sync({ force: true }) // clears db and matches models to tables
   console.log('db synced!')
 
@@ -268,4 +268,4 @@ if (module === require.main) {
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+module.exports = seed;
