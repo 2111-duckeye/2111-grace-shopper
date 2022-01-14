@@ -14,11 +14,11 @@ const Cart_Item = require('./models/Cart_Item')
 User.hasMany(Order)
 Order.belongsTo(User)
 
-/*
-User.hasOne(Cart);
-Cart.belongsTo(User);
-Cart.hasMany(Product);
-Product.belongsTo(Cart);
+
+// User.hasOne(Cart);
+// Cart.belongsTo(User);
+// Cart.hasMany(Product);
+// Product.belongsTo(Cart);
 
 module.exports = {
 	db,
