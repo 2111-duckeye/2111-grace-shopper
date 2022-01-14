@@ -1,7 +1,5 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
-const Product = require('./Product');
-const Order = require('./Order')
 
 const Cart_Item = db.define('Cart_Item', {
 	total: {
@@ -14,8 +12,6 @@ const Cart_Item = db.define('Cart_Item', {
 	}
 });
 
-Order.belongsToMany(Product, { through: Cart_Item });
-Product.belongsToMany(Order, { through: Cart_Item });
 
 Cart_Item.prototype.priceTotal = function () {
 	//Return the sum price of all items in cart

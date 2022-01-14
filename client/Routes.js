@@ -10,9 +10,8 @@ import Cart from "./components/Cart";
 import Users from "./components/Users";
 import OrderPage from "./components/OrderPage";
 
-/**
- * COMPONENT
- */
+
+/* * COMPONENT */
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
@@ -22,10 +21,17 @@ class Routes extends Component {
     const { isLoggedIn } = this.props;
 
     return (
-      <div>
+      <Switch>
+        {/*Routes available to all visitors */}
+        <Route exact path='/' component={AllProducts} />
+        <Route exact path='/login' component={Login} />
+        <Route path="/products/:productId" component={SingleProduct} />
+        {/* <Route path="/cart" exact component={Cart} /> */}
+        <Route path="/users" component={Users} />
+      
         {isLoggedIn ? (
           <Switch>
-            <Route path="/" component={Home} />
+            <Route path="/" component={AllProducts} />
             <Redirect to="/" />
           </Switch>
         ) : (
@@ -36,13 +42,9 @@ class Routes extends Component {
           </Switch>
         )}
         <Switch>
-          <Route path="/products" component={AllProducts} />
-          <Route path="/products/:productId" component={SingleProduct} />
           <Route path="/order" component={OrderPage} />
         </Switch>
-        <Route path="/cart" exact component={Cart} />
-        <Route path="/users" component={Users} />
-      </div>
+      </Switch>
     );
   }
 }
