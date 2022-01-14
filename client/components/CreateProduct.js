@@ -25,7 +25,7 @@ class CreateProduct extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.createCampus({ ...this.state });
+    this.props.createProduct({ ...this.state });
     this.setState({
       name: "",
       imageURL: "",
@@ -44,7 +44,7 @@ class CreateProduct extends Component {
         <input name="name" onChange={handleChange} value={name} />
 
         <label htmlFor="imageURL">ImageUrl:</label>
-        <input name="imageUrl" onChange={handleChange} value={imageURL} />
+        <input name="imageURL" onChange={handleChange} value={imageURL} />
 
         <label htmlFor="description">Description:</label>
         <input name="description" onChange={handleChange} value={description} />
