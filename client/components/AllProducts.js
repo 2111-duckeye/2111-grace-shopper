@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import {Grid} from "@material-ui/core";
 import {Card, CardMedia, CardContent, CardActions, Typography, IconButton } from "@material-ui/core";
 import { AddShoppingCart } from "@material-ui/icons";
-
-import useStyles from '../../public/styles'
+import { Link } from "react-router-dom";
 
 const products = [
   {
@@ -36,34 +35,21 @@ const products = [
 ];
 
 const AllProducts = () => {
-    const classes = useStyles();
     return (
-      <main className={classes.content}>
-       <Grid container justify="center" spacing={4}>
-        {products.map((product) => (
-          <Grid key={product.id} xs={12} sm={6} md={4} lg={3}>
-            <Card className={classes.root}>
-              <CardMedia className={classes.media} image={product.imageUrl} title={product.name} />
-              <CardContent>
-                <div className={classes.cardContent}>
-                  <Typography variant="h5" gutterBottom>
-                    {product.name}
-                  </Typography>
-                  <Typography variant="h5">
-                    {product.price}
-                  </Typography>
-                </div>
-              </CardContent>
-              <CardActions disableSpacing className={classes.CardActions}>
-                <IconButton aria-label="Add to Card">
-                  <AddShoppingCart />
-                </IconButton>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-        </Grid>
-      </main>
+    <div className="container" >
+      {products.map(product => (
+          <div className="card" key={product.id}>
+          <div className="card-header" >
+            <img src={product.imageUrl} />
+            <h4>{product.name}</h4>
+            <h4>${product.price}</h4>
+            <p>{product.description}</p>
+            <Link to={`/products/${product.id}`}><button type="button">View Item</button></Link>
+            <button type="button">Add to Cart</button>
+          </div>
+          </div>
+    ))}
+    </div>
   );
 }
 

@@ -18,33 +18,18 @@ export default class SingleProduct extends Component {
     const imgUrl = item.imageUrl;
 
     return (
-      <div id="singleItem">
+      <main class="container">
+        <div class="left-column">
         <img src={imgUrl} style={{ width: "500px", height: "500px" }} />
-        <h1 className="singleItemName">{name}</h1>
-        <div>{price}</div>
-        <p>{description}</p>
-
-        {/*<div>
-          {campus.students
-            ? campus.students.map((student) => (
-                <div className="student" key={student.id}>
-                  <Link to={`/students/${student.id}`}>
-                    <p>{`${student.firstName} ${student.lastName}`}</p>
-                  </Link>
-                  <button
-                    type="button"
-                    key={student.campusId}
-                    className="remove"
-                    onClick={() => this.unregister(student)}
-                  >
-                    Unregister
-                  </button>
-                </div>
-              ))
-            : `There are no students at this campus`}
         </div>
-            */}
-      </div>
+        <div class="right-column">
+        <h1 className="singleItemName">{name}</h1>
+        <p>{description}</p>
+        <div class="product-price">
+          <span>{price}</span>
+          <button type="submit">Add to cart</button></div>
+        </div>
+      </main>
     );
   }
 }
