@@ -12,7 +12,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
       </Link>
     </div>
     <nav className="header-container-right">
-      <Link to="/cart">
+      <Link to="/order">
         <Button variant="light" type="button">
           <img
             className="cart-button-img"
