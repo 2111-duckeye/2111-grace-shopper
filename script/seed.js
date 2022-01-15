@@ -1,6 +1,5 @@
 'use strict';
-const db = require('../server/db/db');
-const { User, Product, Order, Cart_Item } = require('../server/db/index');
+const {db, models: {User, Product, Order, Cart_Item} } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -180,7 +179,7 @@ const products = [
 		price: 1500,
 	},
 ];
-//name, description, price, imageUrl
+//name, description, price, imageURL
 //{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
 const orders = [
 	{

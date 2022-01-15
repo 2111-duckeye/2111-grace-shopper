@@ -49,7 +49,7 @@ class OrderPage extends React.Component {
           )
         }
         {
-          openOrder.total ? <h1>{this.props.user.username}'s Total: {openOrder.total}</h1> : <h1>HELLO ORDER NOT LOADED CHECK</h1>
+          openOrder.id ? <h1>{this.props.user.username}'s Total: ${openOrder.total}</h1> : <h1>HELLO ORDER NOT LOADED CHECK</h1>
         }
         <a href='#' onClick={this.props.handleClick}>Logout</a>
       </div>
