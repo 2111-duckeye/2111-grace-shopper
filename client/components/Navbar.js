@@ -1,66 +1,60 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logout } from '../store';
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Badge,
-  Typography,
-} from '@material-ui/core';
-import { ShoppingCart } from '@material-ui/icons';
+import React from 'react'
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+import {logout} from '../store'
+import Button from 'react-bootstrap/Button'
 
-import useStyles from '../../public/navBarStyles';
+const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
+  <div className="header-container">
+    <div className="header-container-left">
+      <Link to="/">
+        <h2 className="duckeye-title">Duckeye Cat Supplies</h2>
+      </Link>
+    </div>
+    <nav className="header-container-right">
+      <Link to="/cart">
+        <Button variant="light" type="button">
+          <img
+            className="cart-button-img"
+            src="https://image.flaticon.com/icons/png/512/34/34627.png" 
+          />
+        </Button>
+      </Link>
+      {isLoggedIn ? (
+        <div>
+          {/* The navbar will show these links after you log in */}
+          <Link to="/" className="home-button">
+            <Button>Home</Button>
+          </Link>
+          <a href="#" onClick={handleClick} className="logout-button">
+            <Button>Logout</Button>
+          </a>
+          <Link to="/user/order-history" className="signup-button">
+            <Button>Order History</Button>
+          </Link>
+        </div>
+      ) : (
+        <div className="header-buttons">
+          {/* The navbar will show these links before you log in */}
+          <Link to="/login" className="login-button">
+            <Button>Login</Button>
+          </Link>
+          <Link to="/signup" className="signup-button">
+            <Button>Sign Up</Button>
+          </Link>
+        </div>
+      )}
+      {isAdmin ? (
+        <Link to="/admin/home">
+          <Button type="button">Admin</Button>
+        </Link>
+      ) : (
+        ''
+      )}
+    </nav>
+  </div>
+)
 
-const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
-  return ({ handleClick, isLoggedIn }) => {
-    const classes = useStyles();
-    return (
-      <div>
-        <AppBar position='fixed' className={classes.appBar} color='inherit'>
-          <Toolbar>
-            <Typography variant='h6' className={classes.title} color='inherit'>
-              Duck Eye
-            </Typography>
-            <div className={classes.grow} />
-            <div className={classes.grow}>
-              {isLoggedIn ? (
-                <div>
-                  {/* The navbar will show these links after you log in */}
-                  <Link to='/'>Home</Link>
-                  <a href='#' onClick={handleClick}>
-                    Logout
-                  </a>
-                </div>
-              ) : (
-                <div>
-                  {/* The navbar will show these links before you log in */}
-                  <Link to='/' style={{ marginRight: 10 }}>
-                    Home
-                  </Link>
-                  <Link to='/login' style={{ marginRight: 10 }}>
-                    Login
-                  </Link>
-                  <Link to='/signup' style={{ marginRight: 10 }}>
-                    Sign Up
-                  </Link>
-                </div>
-              )}
-            </div>
-            {isAdmin ? <Link to='/users'>Users</Link> : ''}
-            <div className={classes.button}>
-              <IconButton aria-label='Show cart items' color='inherit'>
-                <Badge badgeContent={2} color='secondary'></Badge>
-                <ShoppingCart />
-              </IconButton>
-            </div>
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
-  };
-};
 
 /**
  * CONTAINER
