@@ -15,12 +15,12 @@ class OrderPage extends React.Component {
 
   componentDidMount() {
     this.setState({loading: false})
+    this.props.loadOpenOrder()
+    this.props.loadOrders()
   }
 
   componentDidUpdate() {
     if(!this.state.loadedUserOrder && this.props.user.id){
-      this.props.loadOpenOrder(this.props.user.id)
-      this.props.loadOrders(this.props.user.id)
       this.setState({loadedUserOrder: true})
     }
   }
@@ -49,7 +49,7 @@ class OrderPage extends React.Component {
           )
         }
         {
-          openOrder.total ? <h1>{this.props.user.username}'s Total: {openOrder.total}</h1> : <h1>HELLO ORDER NOT LOADED CHECK</h1>
+          openOrder.id ? <h1>{this.props.user.username}'s Total: ${openOrder.total}</h1> : <h1>HELLO ORDER NOT LOADED CHECK</h1>
         }
         <a href='#' onClick={this.props.handleClick}>Logout</a>
       </div>
@@ -68,7 +68,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadOrders: (userId) => dispatch(fetchOrders(userId)),
-    loadOpenOrder: (userId) => dispatch(fetchOrder(userId)),
+    loadOpenOrder: () => dispatch(fetchOrder()),
     handleClick: () => dispatch(logout())
   }
 }

@@ -5,7 +5,7 @@ const Order = require('./Order')
 
 const Cart_Item = db.define('Cart_Item', {
     total: {
-        type: Sequelize.DECIMAL(10,2),
+        type: Sequelize.INTEGER,
         defaultValue: 0
     },
     quantity: {

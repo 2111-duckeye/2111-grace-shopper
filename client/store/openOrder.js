@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const GET_ORDER = 'GET_ORDER'
+export const GET_ORDER = 'GET_ORDER'
+const TOKEN = 'token'
 
 //action creation
 
@@ -9,13 +10,28 @@ export const setOrder = (order) => ({
   order
 })
 
+
 //Thunk creator
 
-export const fetchOrder = (userId) => {
+export const fetchOrder = () => {
   return async (dispatch) => {
     try {
-      const { data: order } = await axios.get(`/api/orders/user/${userId}/open`)
-      dispatch(setOrder(order))
+      const token = window.localStorage.getItem(TOKEN)
+
+      if (token) {
+        const res = await axios.get('/auth/me', {
+          headers: {
+            authorization: token
+          }
+        })
+
+        const { data: order } = await axios.get(`/api/orders/user/${res.data.id}/open`)
+        // const { data: orders } = await axios.get(`/api/orders/user/${res.data.id}`)
+
+        // return dispatch(setAuth(res.data, order, orders))
+        return dispatch(setOrder(order))
+      }
+
     } catch (e) {
       console.log("COULDN'T FETCH ORDER", e)
     }

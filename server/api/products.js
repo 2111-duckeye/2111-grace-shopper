@@ -7,7 +7,7 @@ module.exports = router;
 router.get('/', async (req, res, next) => {
 	try {
 		const products = await Product.findAll({
-			attributes: ['name', 'imageURL', 'description', 'price'],
+			attributes: ['id', 'name', 'imageURL', 'description', 'price'],
 		});
 		res.json(products);
 	} catch (err) {
@@ -27,7 +27,7 @@ router.post('/', requireToken, isAdmin, async (req, res, next) => {
 router.get('/:productId', async (req, res, next) => {
 	try {
 		const singleProduct = await Product.findByPk(req.params.productId, {
-			attributes: ['name', 'imageURL', 'description', 'price'],
+			attributes: ['id', 'name', 'imageURL', 'description', 'price'],
 		});
 		res.json(singleProduct);
 	} catch (err) {

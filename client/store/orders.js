@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const GET_ORDERS = 'GET_ORDERS'
+const TOKEN = 'token'
 
 //action creation
 export const setOrders = (orders) => ({
@@ -9,11 +10,21 @@ export const setOrders = (orders) => ({
 })
 
 //Thunk creator
-export const fetchOrders = (userId) => {
+export const fetchOrders = () => {
   return async (dispatch) => {
     try {
-      const { data: orders } = await axios.get(`/api/orders/user/${userId}`)
-      dispatch(setOrders(orders))
+      const token = window.localStorage.getItem(TOKEN)
+
+      if (token) {
+        const res = await axios.get('/auth/me', {
+          headers: {
+            authorization: token
+          }
+        })
+
+        const { data: orders } = await axios.get(`/api/orders/user/${res.data.id}`)
+        return dispatch(setOrders(orders))
+      }
     } catch (e) {
       console.log("COULDN'T FETCH ORDERS", e)
     }

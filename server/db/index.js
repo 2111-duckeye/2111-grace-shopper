@@ -22,8 +22,10 @@ Order.belongsTo(User)
 
 module.exports = {
 	db,
-	User,
-	Product,
-	Order,
-	Cart_Item
+	models: {
+		User,
+		Product,
+		Order,
+		Cart_Item
+	},
 };
