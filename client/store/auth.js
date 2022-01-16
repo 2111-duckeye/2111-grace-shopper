@@ -11,7 +11,9 @@ const SET_AUTH = 'SET_AUTH'
 /**
  * ACTION CREATORS
  */
-const setAuth = auth => ({ type: SET_AUTH, auth })
+//const setAuth = (auth, openOrder, orders) => ({ type: SET_AUTH, auth, openOrder, orders })
+
+const setAuth = (auth) => ({ type: SET_AUTH, auth})
 
 /**
  * THUNK CREATORS
@@ -24,6 +26,11 @@ export const me = () => async dispatch => {
         authorization: token
       }
     })
+
+    // const { data: order } = await axios.get(`/api/orders/user/${res.data.id}/open`)
+    // const { data: orders } = await axios.get(`/api/orders/user/${res.data.id}`)
+
+    // return dispatch(setAuth(res.data, order, orders))
     return dispatch(setAuth(res.data))
   }
 }
@@ -43,7 +50,11 @@ export const logout = () => {
   history.push('/login')
   return {
     type: SET_AUTH,
-    auth: {}
+    auth: {},
+    // openOrder: {
+    //   completed: false,
+    //   total: 0
+    // }
   }
 }
 
@@ -53,6 +64,11 @@ export const logout = () => {
 export default function (state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
+      // return {
+      //   user: action.auth,
+      //   openOrder: action.openOrder,
+      //   orders: action.orders
+      // }
       return action.auth
     default:
       return state
