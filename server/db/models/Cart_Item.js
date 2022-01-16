@@ -13,7 +13,6 @@ const Cart_Item = db.define('Cart_Item', {
         defaultValue: 0
     }
 });
-
 Order.belongsToMany(Product, { through: Cart_Item });
 Product.belongsToMany(Order, { through: Cart_Item });
 

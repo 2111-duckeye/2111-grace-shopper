@@ -8,16 +8,16 @@ export const setProducts = (products) => ({
   type: GOT_PRODUCTS,
   products
 })
+
 export const _createProduct = (product) => ({
   type: CREATE_PRODUCT,
   product,
 });
+
 export const _removeProduct = (product) => ({
   type: REMOVE_PRODUCT,
   product,
 });
-
-
 
 
 

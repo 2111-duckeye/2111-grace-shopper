@@ -85,7 +85,6 @@ html, body {
   box-sizing: border-box;
 }
 body {
-  display: flex;
   justify-content: center;
   align-items: center;
   margin: 0;
@@ -126,4 +125,34 @@ body {
 .card-body p {
   font-size: 13px;
   margin: 0 0 40px;
+}
+
+/* Navbar */
+.duckeye-title {
+  color: cadetblue;
+  padding-top: 20px;
+  display: flex;
+  padding-left: 50px;
+}
+.login-button {
+  color: black;
+}
+.signup-button {
+  color: black;
+}
+.logout-button {
+  color: black;
+}
+.home-button {
+  color: black;
+}
+.header-container {
+  background-color: #fcdebe;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-button-img {
+  width: 20px;
+  height: 20px;
 }
