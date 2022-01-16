@@ -15,12 +15,12 @@ class OrderPage extends React.Component {
 
   componentDidMount() {
     this.setState({loading: false})
+    this.props.loadOpenOrder()
+    this.props.loadOrders()
   }
 
   componentDidUpdate() {
     if(!this.state.loadedUserOrder && this.props.user.id){
-      this.props.loadOpenOrder(this.props.user.id)
-      this.props.loadOrders(this.props.user.id)
       this.setState({loadedUserOrder: true})
     }
   }
@@ -68,7 +68,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadOrders: (userId) => dispatch(fetchOrders(userId)),
-    loadOpenOrder: (userId) => dispatch(fetchOrder(userId)),
+    loadOpenOrder: () => dispatch(fetchOrder()),
     handleClick: () => dispatch(logout())
   }
 }
