@@ -5,9 +5,9 @@ import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { me, fetchOrder, fetchOrders } from "./store";
 import SingleProduct from "./components/SingleProduct";
-import AllProducts from "./components/AllProducts";
 import Users from "./components/Users";
 import OrderPage from "./components/OrderPage";
+import AdminHome from "./components/AdminHome";
 
 
 
@@ -39,7 +39,7 @@ class Routes extends Component {
         )}
         {isLoggedIn && isAdmin ? (
           <Switch>
-            <Route exact path='/admin/users' component={Users} />
+            <Route exact path='/admin/home' component={AdminHome} />
           </Switch>
         ) : ''}
       </div>

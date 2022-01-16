@@ -65,7 +65,7 @@ const mapSignup = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch, history) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
@@ -77,6 +77,7 @@ const mapDispatch = dispatch => {
         email = evt.target.email.value
       }
       dispatch(authenticate(username, password, email, formName))
+      history.push('/');
     }
   }
 }
