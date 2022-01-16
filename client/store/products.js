@@ -2,7 +2,6 @@ import axios from 'axios'
 const GOT_PRODUCTS = 'GOT_PRODUCTS'
 const CREATE_PRODUCT = 'CREATE_PRODUCT';
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
-const SET_SINGLE_PRODUCT = 'SET_SINGLE_PRODUCT';
 
 //action creation
 export const setProducts = (products) => ({
@@ -10,21 +9,15 @@ export const setProducts = (products) => ({
   products
 })
 
-export const setSingleProduct = (product) => ({
-  type: SET_SINGLE_PRODUCT,
-  product
-})
-
 export const _createProduct = (product) => ({
   type: CREATE_PRODUCT,
   product,
 });
+
 export const _removeProduct = (product) => ({
   type: REMOVE_PRODUCT,
   product,
 });
-
-
 
 
 
@@ -36,17 +29,6 @@ export const fetchProducts = () => {
       dispatch(setProducts(products))
     } catch (e) {
       console.log("COULDN'T FETCH PRODUCTS", e)
-    }
-  }
-}
-
-export const fetchProduct = (id) => {
-  return async (dispatch) => {
-    try {
-      const { data: product } = await axios.get(`/api/products/${id}`)
-      dispatch(setSingleProduct(product))
-    } catch (e) {
-      console.log("COULDN'T FETCH SINGLE PRODUCT", e)
     }
   }
 }
@@ -80,8 +62,6 @@ export default function productsReducer(state = [], action) {
   switch (action.type) {
     case GOT_PRODUCTS:
       return action.products;
-    case SET_SINGLE_PRODUCT:
-      return action.product;
     case CREATE_PRODUCT:
       return [...state, action.product];
     case REMOVE_PRODUCT:
