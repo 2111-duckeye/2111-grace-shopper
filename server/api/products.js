@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const Product = require('../db/models/Product');
+const { requireToken, isAdmin } = require('./gatekeepingMiddleware');
+
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
@@ -13,7 +15,7 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', requireToken, isAdmin, async (req, res, next) => {
 	try {
 		const { name, description, price } = req.body;
 		res.status(201).send(await Product.create({ name, description, price }));
@@ -33,7 +35,7 @@ router.get('/:productId', async (req, res, next) => {
 	}
 });
 
-router.put('/:productId', async (req, res, next) => {
+router.put('/:productId', requireToken, isAdmin, async (req, res, next) => {
 	try {
 		const product = await Product.findByPk(req.params.productId);
 		res.send(await product.update(req.body));
@@ -42,7 +44,7 @@ router.put('/:productId', async (req, res, next) => {
 	}
 });
 
-router.delete('/:productId', async (req, res, next) => {
+router.delete('/:productId', requireToken, isAdmin, async (req, res, next) => {
 	try {
 		const findProduct = await Product.findByPk(req.params.productId);
 		if (findProduct) {
