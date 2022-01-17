@@ -1,7 +1,10 @@
+import { NextWeek } from '@material-ui/icons'
 import axios from 'axios'
+import product from './product'
 
 export const GET_ORDER = 'GET_ORDER'
-const DELETE_PRODUCT = 'DELETE_PRODUCT'
+export const DELETE_PRODUCT = 'DELETE_PRODUCT'
+export const ADD_PRODUCT = 'ADD_PRODUCT'
 const TOKEN = 'token'
 
 //action creation
@@ -14,6 +17,11 @@ export const setOrder = (order) => ({
 
 export const _deleteProduct = (updatedOrder) => ({
   type: DELETE_PRODUCT,
+  updatedOrder
+})
+
+export const _addProduct = (updatedOrder) => ({
+  type: ADD_PRODUCT,
   updatedOrder
 })
 
@@ -41,6 +49,33 @@ export const fetchOrder = () => {
 
     } catch (e) {
       console.log("COULDN'T FETCH ORDER", e)
+    }
+  }
+}
+
+export const addProduct = (productId) => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem(TOKEN)
+
+      if (token) {
+        const res = await axios.get('/auth/me', {
+          headers: {
+            authorization: token
+          }
+        })
+
+        const { data: updatedOrder } = await axios.post(`/api/orders/user/${res.data.id}/open/add/${productId}`, {
+          headers: {
+            authorization: token
+          }
+        })
+
+        return dispatch(_addProduct(updatedOrder))
+      }
+
+    } catch (err) {
+      console.error(err)
     }
   }
 }
@@ -78,6 +113,8 @@ export default function openOrderReducer(state = {}, action) {
     case GET_ORDER:
       return action.order
     case DELETE_PRODUCT:
+      return action.updatedOrder
+    case ADD_PRODUCT:
       return action.updatedOrder
     default:
       return state

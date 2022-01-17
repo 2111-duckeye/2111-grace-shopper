@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchProduct } from "../store";
+import { addProduct } from '../store/openOrder';
 
 
 class SingleProduct extends Component {
@@ -21,7 +22,7 @@ class SingleProduct extends Component {
         <p>{product.description}</p>
         <div className="product-price">
           <span>{product.price}</span>
-          <button type="submit">Add to cart</button></div>
+          <button type="addProductToCart" onClick={() => this.props.addProduct(product.id)}>Add to Cart</button></div>
         </div>
       </main>
     );
@@ -33,7 +34,8 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch) => ({
-  fetchProduct: (id) => dispatch(fetchProduct(id))
+  fetchProduct: (id) => dispatch(fetchProduct(id)),
+  addProduct: (productId) => dispatch(addProduct(productId))
 })
 
 export default connect(mapState, mapDispatch)(SingleProduct);

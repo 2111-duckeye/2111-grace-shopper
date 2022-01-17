@@ -41,7 +41,7 @@ class OrderPage extends React.Component {
                 {products.map((product) => {
                   return (
                     <div key={product.id}>
-                      <li>{product.name}</li>
+                      <li>{product.name}, price: ${product.price}, quantity: {product.Cart_Item.quantity}</li>
                       <button className='delete' type='delete' onClick={ () =>this.props.deleteProduct(product.id)}>X</button>
                     </div>
                   )
