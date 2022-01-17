@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 const GOT_PRODUCTS = 'GOT_PRODUCTS';
 const CREATE_PRODUCT = 'CREATE_PRODUCT';
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
@@ -63,16 +64,16 @@ export const updateProduct = (product, history) => {
     const token = window.localStorage.getItem(TOKEN);
     try {
       if (token) {
-      const { data } = await axios.put(`/api/products/${product.id}`, product, {
+      const { data: updated } = await axios.put(`/api/products/${product.id}`, product, {
         headers: {
           authorization: token
         }
       });
-      dispatch(_updateProduct(data));
+      dispatch(_updateProduct(updated));
       history.push('/');
       }
     } catch (e) {
-      console.error("COULDN'T DELETE PRODUCT", e);
+      console.error("COULDN'T UPDATE PRODUCT", e);
     }
   };
 };

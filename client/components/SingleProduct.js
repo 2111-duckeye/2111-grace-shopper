@@ -33,7 +33,7 @@ class SingleProduct extends Component {
             <Link to="/addproduct" className="admin-button">
               <Button>Create Product</Button>
             </Link>
-            <Link to="/editproduct" className="admin-button">
+            <Link to={`/products/${product.id}/edit`} className="admin-button">
               <Button>Edit Product</Button>
             </Link>
             <a href="#" onClick={(evt) => {

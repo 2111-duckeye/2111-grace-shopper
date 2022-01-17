@@ -1,83 +1,65 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchProduct , updateProduct} from '../../store';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProduct, updateProduct } from '../../store';
+import { setSingleProduct } from '../../store/product';
+import { Link, useHistory } from 'react-router-dom';
 
-class EditProduct extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      imageURL: '',
-      description: '',
-      price: 0,
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+const EditProduct = (props) => {
+   
+   const [name, setName] = useState('');
+   const [imageURL, setImageURL] = useState('');
+   const [description, setDescription] = useState('');
+   const [price, setPrice] = useState(0);
 
-  componentDidMount() {
-    const productId = this.props.match.params.productId;
-    this.props.fetchProduct(productId);
-  }
+  const dispatch = useDispatch();
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.product.id !== this.props.product.id) {
-      this.setState({
-        name: this.props.product.name || '',
-        imageURL: this.props.product.imageURL || '',
-        description: this.props.product.description || '',
-        price: this.props.product.price || 0
-      });
+  const history = useHistory();
+
+  const id = props.match.params.productId;
+
+  useEffect(() => {
+    dispatch(fetchProduct(id))
+  }, [])
+
+  const product = useSelector((state) => {
+    return state.product
+  })
+
+  useEffect(() => {
+    if (product.name && product.imageURL && product.description && product.price) {
+      setName(product.name)
+      setImageURL(product.imageURL)
+      setDescription(product.description)
+      setPrice(product.price)
     }
-  }
+  }, [product])
 
-  handleChange(evt) {
-    this.setState({
-      [evt.target.name]: evt.target.value,
-    });
-  }
-
-  handleSubmit(evt) {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
-    this.props.updateProduct({...this.props.product, ...this.state});
+    dispatch(updateProduct({...product, name, imageURL, description, price}, history))
   }
 
-  render() {
-    const { name, imageURL, description, price } = this.state;
-    const { handleSubmit, handleChange } = this;
-
-    return (
+  return (
       <div>
         <h2>Edit Product</h2>
       <form id="product-form" onSubmit={handleSubmit}>
         <label htmlFor="name">Product Name:</label>
-        <input name="name" onChange={handleChange} value={name} />
+        <input name="name" onChange={(e) => setName(e.target.value)} value={name} />
 
         <label htmlFor="imageURL">ImageUrl:</label>
-        <input name="imageURL" onChange={handleChange} value={imageURL} />
+        <input name="imageURL" onChange={(e) => setImageURL(e.target.value)} value={imageURL} />
 
         <label htmlFor="description">Description:</label>
-        <input name="description" onChange={handleChange} value={description} />
+        <input name="description" onChange={(e) => setDescription(e.target.value)} value={description} />
 
         <label htmlFor="price">Price:</label>
-        <input name="price" onChange={handleChange} value={price} />
+        <input name="price" onChange={(e) => setPrice(e.target.value)} value={price} />
 
         <button type="submit">Submit</button>
         <Link to="/">Cancel</Link>
       </form>
       </div>
     );
-  }
 }
 
-const mapState = (state) => ({
-  product: state.product
-})
-
-const mapDispatch = (dispatch, {history}) => ({
-  fetchProduct: (id) => dispatch(fetchProduct(id)),
-  updateProduct: (product) => dispatch(updateProduct(product, history))
-});
-
-export default connect(mapState, mapDispatch)(EditProduct);
+export default EditProduct;
