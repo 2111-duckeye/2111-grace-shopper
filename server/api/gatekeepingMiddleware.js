@@ -20,10 +20,10 @@ const isAdmin = (req, res, next) => {
 };
 
 const canViewOrder = (req, res, next) => {
-	if (!req.user.isAdmin && req.user.id !== req.userId) {
-		return res.status(403).send('Cannot view other users orders')
-	} else{
+	if (req.user.isAdmin || `${req.user.dataValues.id}` === req.params.userId) {
 		next()
+	} else{
+		return res.status(403).send('Cannot view other users orders')
 	}
 }
 
