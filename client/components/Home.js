@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import AllProducts from "./AllProducts";
-import Navbar from "./Navbar";
+import React from 'react';
+import { connect } from 'react-redux';
+import AllProducts from './AllProducts';
+import Navbar from './Navbar';
 
 /**
  * COMPONENT
@@ -11,7 +11,7 @@ export const Home = (props) => {
 
   return (
     <div>
-      <h3>Welcome, {username}</h3>
+      <h3>Welcome {username}</h3>
       <AllProducts />
     </div>
   );

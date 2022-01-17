@@ -5,39 +5,40 @@ import { connect } from 'react-redux';
 import { fetchProducts } from '../store/products';
 
 class AllProducts extends Component {
-	componentDidMount() {
-		this.props.fetchProducts();
-	}
+  componentDidMount() {
+    this.props.fetchProducts();
+  }
 
-	render() {
-		const products = this.props.products || [];
-		return (
-			<div className='container'>
-				{products.map((product) => (
-					<div className='card' key={product.id}>
-						<div className='card-header'>
-							<img src={product.imageURL} />
-							<h4>{product.name}</h4>
-							<h4>${(product.price / 100).toFixed(2)}</h4>
-							<p>{product.description}</p>
-							<Link to={`/products/${product.id}`}>
-								<button type='button'>View Item</button>
-							</Link>
-							<button type='button'>Add to Cart</button>
-						</div>
-					</div>
-				))}
-			</div>
-		);
-	}
+  render() {
+    const products = this.props.products || [];
+    return (
+      <div className="container">
+        {products.map((product) => (
+          <div className="card" key={product.id}>
+            <div className="card-header">
+              <div className="card-content">
+                <img src={product.imageURL} />
+                <h4>{product.name}</h4>
+                <h4>${product.price}</h4>
+                <Link to={`/products/${product.id}`}>
+                  <button type="button">View Item</button>
+                </Link>
+                <button type="button">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
 }
 
 const mapState = (state) => ({
-	products: state.products,
+  products: state.products,
 });
 
 const mapDispatch = (dispatch) => ({
-	fetchProducts: () => dispatch(fetchProducts()),
+  fetchProducts: () => dispatch(fetchProducts()),
 });
 
 export default connect(mapState, mapDispatch)(AllProducts);

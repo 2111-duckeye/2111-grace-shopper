@@ -18,13 +18,14 @@ form nav {
 
 /* Single Item */
 /* Basic Styling */
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   margin: 0;
   font-family: 'Roboto', sans-serif;
 }
- 
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -36,7 +37,7 @@ html, body {
   width: 65%;
   position: relative;
 }
- 
+
 .right-column {
   width: 35%;
   margin-top: 60px;
@@ -50,18 +51,18 @@ html, body {
   top: 0;
   transition: all 0.3s ease;
 }
- 
+
 .left-column img.active {
   opacity: 1;
 }
 /* Product Description */
 .product-description {
-  border-bottom: 1px solid #E1E8EE;
+  border-bottom: 1px solid #e1e8ee;
   margin-bottom: 20px;
 }
 .product-description span {
   font-size: 12px;
-  color: #358ED7;
+  color: #358ed7;
   letter-spacing: 1px;
   text-transform: uppercase;
   text-decoration: none;
@@ -69,18 +70,18 @@ html, body {
 .product-description h1 {
   font-weight: 300;
   font-size: 52px;
-  color: #43484D;
+  color: #43484d;
   letter-spacing: -2px;
 }
 .product-description p {
   font-size: 16px;
   font-weight: 300;
-  color: #86939E;
+  color: #86939e;
   line-height: 24px;
 }
 
 /*Products Card*/
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 * {
   box-sizing: border-box;
 }
@@ -89,7 +90,7 @@ body {
   align-items: center;
   margin: 0;
   background-color: #f7f8fc;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #10182f;
 }
 .container {
@@ -125,6 +126,10 @@ body {
 .card-body p {
   font-size: 13px;
   margin: 0 0 40px;
+}
+
+.card-content {
+  margin: 15px;
 }
 
 /* Navbar */
