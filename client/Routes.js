@@ -7,8 +7,9 @@ import { me, fetchOrder, fetchOrders } from "./store";
 import SingleProduct from "./components/SingleProduct";
 import Users from "./components/Users";
 import OrderPage from "./components/OrderPage";
-import AdminHome from "./components/AdminHome";
-
+import CreateProduct from "./components/Admin/CreateProduct";
+import EditProduct from "./components/Admin/EditProduct";
+import AdminHome from "./components/Admin/AdminHome";
 
 
 /* * COMPONENT */
@@ -40,6 +41,8 @@ class Routes extends Component {
         {isLoggedIn && isAdmin ? (
           <Switch>
             <Route exact path='/admin/home' component={AdminHome} />
+            <Route exact path='/addproduct' component={CreateProduct} />
+            <Route exact path='/editproduct' component={EditProduct} />
           </Switch>
         ) : ''}
       </div>

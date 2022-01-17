@@ -12,7 +12,7 @@ export const setProducts = (products) => ({
 })
 export const _createProduct = (product) => ({
   type: CREATE_PRODUCT,
-  product,
+  product
 });
 
 export const _updateProduct = (product) => ({
@@ -22,7 +22,7 @@ export const _updateProduct = (product) => ({
 
 export const _removeProduct = (product) => ({
   type: REMOVE_PRODUCT,
-  product,
+  product
 });
 
 //thunk creator
@@ -63,7 +63,7 @@ export const updateProduct = (product, history) => {
     const token = window.localStorage.getItem(TOKEN);
     try {
       if (token) {
-        const { data } = await axios.put(`/api/products/${product.id}`.product, {
+        const { data } = await axios.put(`/api/products/${product.id}`, product, {
           headers: {
             authorization: token
           }
@@ -77,11 +77,19 @@ export const updateProduct = (product, history) => {
   }
 }
 
-export const deleteProduct = (productId, history) => {
+export const deleteProduct = (product, history) => {
     return async (dispatch) => {
+      const token = window.localStorage.getItem(TOKEN);
       try {
-        const { data: deleted } = await axios.delete(`/api/products/${productId}`);
-        dispatch(_removeProduct(deleted));
+        if (token) {
+        const { data } = await axios.delete(`/api/products/${product.id}`, product, {
+          headers: {
+            authorization: token
+          }
+        });
+        dispatch(_removeProduct(data));
+        history.push('/');
+        }
       } catch (e) {
         console.error("COULDN'T DELETE PRODUCT", e);
       }
@@ -96,8 +104,10 @@ export const deleteProduct = (productId, history) => {
         return action.products;
       case CREATE_PRODUCT:
         return [...state, action.product];
+      case UPDATE_PRODUCT:
+        return state.map(product => product.id === action.updateProduct.id ? action.updateProduct : product);
       case REMOVE_PRODUCT:
-        return state.filter((product) => product.id !== action.product.id);
+        return state.filter(product => product.id !== action.product.id);
       default:
         return state;
     }
