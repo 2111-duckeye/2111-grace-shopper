@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios from 'axios'
+
 const GOT_PRODUCTS = 'GOT_PRODUCTS';
 const CREATE_PRODUCT = 'CREATE_PRODUCT';
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
