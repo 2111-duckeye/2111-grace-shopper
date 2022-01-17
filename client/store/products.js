@@ -63,19 +63,19 @@ export const updateProduct = (product, history) => {
     const token = window.localStorage.getItem(TOKEN);
     try {
       if (token) {
-        const { data } = await axios.put(`/api/products/${product.id}`, product, {
-          headers: {
-            authorization: token
-          }
-        });
-        dispatch(_updateProduct(data));
-        history.push('/')
+      const { data } = await axios.put(`/api/products/${product.id}`, product, {
+        headers: {
+          authorization: token
+        }
+      });
+      dispatch(_updateProduct(data));
+      history.push('/');
       }
     } catch (e) {
-      console.error("COULDN'T UPDATE PRODUCT", e)
+      console.error("COULDN'T DELETE PRODUCT", e);
     }
-  }
-}
+  };
+};
 
 export const deleteProduct = (product, history) => {
     return async (dispatch) => {
@@ -105,7 +105,7 @@ export const deleteProduct = (product, history) => {
       case CREATE_PRODUCT:
         return [...state, action.product];
       case UPDATE_PRODUCT:
-        return state.map(product => product.id === action.updateProduct.id ? action.updateProduct : product);
+        return state.map(product => product.id === action.product.id ? action.product : product);
       case REMOVE_PRODUCT:
         return state.filter(product => product.id !== action.product.id);
       default:

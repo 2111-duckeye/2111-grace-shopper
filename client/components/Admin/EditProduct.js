@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProduct } from '../../store/product';
-import { updateProduct } from '../../store/products';
+import { fetchProduct , updateProduct} from '../../store';
 import { Link } from 'react-router-dom';
 
 class EditProduct extends Component {
@@ -25,8 +24,8 @@ class EditProduct extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.product.id !== this.props.product.id) {
       this.setState({
-        name: this.props.product.taskName || '',
-        imageURL: this.props.product.assignee || '',
+        name: this.props.product.name || '',
+        imageURL: this.props.product.imageURL || '',
         description: this.props.product.description || '',
         price: this.props.product.price || 0
       });
@@ -77,8 +76,8 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch, {history}) => ({
-    updateProduct: (product) => dispatch(updateProduct(product, history)),
-    fetchProduct: (id) => dispatch(fetchProduct(id))
+  fetchProduct: (id) => dispatch(fetchProduct(id)),
+  updateProduct: (product) => dispatch(updateProduct(product, history))
 });
 
 export default connect(mapState, mapDispatch)(EditProduct);
