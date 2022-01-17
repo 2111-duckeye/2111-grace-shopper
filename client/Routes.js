@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { withRouter, Route, Switch, Redirect, BrowserRouter as Router} from "react-router-dom";
+import { withRouter, Route, Switch, Redirect, BrowserRouter as Router } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { me, fetchOrder, fetchOrders } from "./store";
@@ -30,11 +30,11 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
-           <Route exact path='/' component={Home} />
-           <Route path='/login' component={Login} />
-           <Route path='signup' component={Signup} />
-           <Route path='/products/:productId' component={SingleProduct} />
-           <Route exact path='/order' component={OrderPage} />
+            <Route exact path='/' component={Home} />
+            <Route path='/login' component={Login} />
+            <Route path='signup' component={Signup} />
+            <Route path='/products/:productId' component={SingleProduct} />
+            <Route exact path='/order' component={OrderPage} />
           </Switch>
         )}
         {isLoggedIn && isAdmin ? (
@@ -55,7 +55,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
-    isAdmin: state.auth.isAdmin,
+    isAdmin: !!state.auth.isAdmin,
     //user: state.auth
   };
 };
