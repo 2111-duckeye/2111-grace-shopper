@@ -41,7 +41,6 @@ const EditProduct = (props) => {
 
   return (
       <div>
-        <h2>Edit Product</h2>
       <form id="product-form" onSubmit={handleSubmit}>
         <label htmlFor="name">Product Name:</label>
         <input name="name" onChange={(e) => setName(e.target.value)} value={name} />

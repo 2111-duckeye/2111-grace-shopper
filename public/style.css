@@ -16,6 +16,24 @@ form nav {
   display: inline-block;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  margin: 5%;
+}
+
+input {
+  padding: 0.3em;
+  margin: 0.5em 0;
+  font-size: 1em;
+}
+
+h2.form {
+  margin-top: 2%;
+}
+
 /* Single Item */
 /* Basic Styling */
 html, body {

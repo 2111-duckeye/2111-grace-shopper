@@ -40,7 +40,7 @@ class CreateProduct extends Component {
 
     return (
       <div>
-        <h2>Create A Product</h2>
+        <h2 text-align="center">Create A Product</h2>
       <form id="product-form" onSubmit={handleSubmit}>
         <label htmlFor="name">Product Name:</label>
         <input name="name" onChange={handleChange} value={name} />
