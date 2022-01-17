@@ -19,7 +19,16 @@ const isAdmin = (req, res, next) => {
 	}
 };
 
+const canViewOrder = (req, res, next) => {
+	if (!req.user.isAdmin && req.user.id !== req.userId) {
+		return res.status(403).send('Cannot view other users orders')
+	} else{
+		next()
+	}
+}
+
 module.exports = {
 	requireToken,
 	isAdmin,
+	canViewOrder
 };

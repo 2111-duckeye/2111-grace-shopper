@@ -25,10 +25,11 @@ export const fetchOrder = () => {
           }
         })
 
-        const { data: order } = await axios.get(`/api/orders/user/${res.data.id}/open`)
-        // const { data: orders } = await axios.get(`/api/orders/user/${res.data.id}`)
-
-        // return dispatch(setAuth(res.data, order, orders))
+        const { data: order } = await axios.get(`/api/orders/user/${res.data.id}/open`, {
+          headers: {
+            authorization: token
+          }
+        })
         return dispatch(setOrder(order))
       }
 
