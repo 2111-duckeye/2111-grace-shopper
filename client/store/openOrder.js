@@ -1,6 +1,10 @@
+import { NextWeek } from '@material-ui/icons'
 import axios from 'axios'
+import product from './product'
 
 export const GET_ORDER = 'GET_ORDER'
+export const DELETE_PRODUCT = 'DELETE_PRODUCT'
+export const ADD_PRODUCT = 'ADD_PRODUCT'
 const TOKEN = 'token'
 
 //action creation
@@ -10,6 +14,16 @@ export const setOrder = (order) => ({
   order
 })
 
+
+export const _deleteProduct = (updatedOrder) => ({
+  type: DELETE_PRODUCT,
+  updatedOrder
+})
+
+export const _addProduct = (updatedOrder) => ({
+  type: ADD_PRODUCT,
+  updatedOrder
+})
 
 //Thunk creator
 
@@ -25,10 +39,11 @@ export const fetchOrder = () => {
           }
         })
 
-        const { data: order } = await axios.get(`/api/orders/user/${res.data.id}/open`)
-        // const { data: orders } = await axios.get(`/api/orders/user/${res.data.id}`)
-
-        // return dispatch(setAuth(res.data, order, orders))
+        const { data: order } = await axios.get(`/api/orders/user/${res.data.id}/open`, {
+          headers: {
+            authorization: token
+          }
+        })
         return dispatch(setOrder(order))
       }
 
@@ -38,10 +53,69 @@ export const fetchOrder = () => {
   }
 }
 
+export const addProduct = (productId) => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem(TOKEN)
+
+      if (token) {
+        const res = await axios.get('/auth/me', {
+          headers: {
+            authorization: token
+          }
+        })
+
+        const { data: updatedOrder } = await axios.post(`/api/orders/user/${res.data.id}/open/add/${productId}`, {
+          headers: {
+            authorization: token
+          }
+        })
+
+        return dispatch(_addProduct(updatedOrder))
+      }
+
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
+export const removeOrderProduct = (productId) => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem(TOKEN)
+
+      if (token) {
+        const res = await axios.get('/auth/me', {
+          headers: {
+            authorization: token
+          }
+        })
+
+        const { data: updatedOrder } = await axios.delete(`/api/orders/user/${res.data.id}/open/delete/${productId}`, {
+          headers: {
+            authorization: token
+          }
+        })
+
+        return dispatch(_deleteProduct(updatedOrder))
+      }
+
+
+    } catch(error) {
+      console.error(error)
+    }
+  }
+}
+
 export default function openOrderReducer(state = {}, action) {
   switch (action.type) {
     case GET_ORDER:
       return action.order
+    case DELETE_PRODUCT:
+      return action.updatedOrder
+    case ADD_PRODUCT:
+      return action.updatedOrder
     default:
       return state
   }

@@ -1,7 +1,8 @@
 import axios from 'axios';
 const GOT_USERS = 'GOT_USERS';
 
-const TOKEN = 'token';
+const TOKEN = 'token'
+
 
 //action creation
 export const setUsers = (users) => ({
@@ -11,19 +12,21 @@ export const setUsers = (users) => ({
 
 //Thunk creator
 export const fetchUsers = () => {
-  return async (dispatch) => {
-    try {
-      const token = window.localStorage.getItem(TOKEN);
-      const { data: users } = await axios.get('/api/users', {
-        headers: {
-          authorization: token,
-        },
-      });
-      dispatch(setUsers(users));
-    } catch (e) {
-      console.log("COULDN'T FETCH USERS", e);
-    }
-  };
+	return async (dispatch) => {
+		try {
+			const token = window.localStorage.getItem(TOKEN);
+			if (token) {
+				const { data: users } = await axios.get('/api/users', {
+					headers: {
+						authorization: token,
+					},
+				});
+				return dispatch(setUsers(users));
+			}
+		} catch (e) {
+			console.log("COULDN'T FETCH USERS", e);
+		}
+	};
 };
 
 export default function usersReducer(state = [], action) {

@@ -22,7 +22,11 @@ export const fetchOrders = () => {
           }
         })
 
-        const { data: orders } = await axios.get(`/api/orders/user/${res.data.id}`)
+        const { data: orders } = await axios.get(`/api/orders/user/${res.data.id}`, {
+          headers: {
+            authorization: token
+          }
+        })
         return dispatch(setOrders(orders))
       }
     } catch (e) {

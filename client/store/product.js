@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'axios'
 
 const SET_SINGLE_PRODUCT = 'SET_SINGLE_PRODUCT';
 

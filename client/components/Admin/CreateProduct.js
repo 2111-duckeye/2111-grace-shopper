@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createProduct } from "../store";
+import { createProduct } from "../../store/products";
 import { Link } from "react-router-dom";
 
 class CreateProduct extends Component {
@@ -39,6 +39,8 @@ class CreateProduct extends Component {
     const { handleSubmit, handleChange } = this;
 
     return (
+      <div>
+        <h2 text-align="center">Create A Product</h2>
       <form id="product-form" onSubmit={handleSubmit}>
         <label htmlFor="name">Product Name:</label>
         <input name="name" onChange={handleChange} value={name} />
@@ -55,6 +57,7 @@ class CreateProduct extends Component {
         <button type="submit">Submit</button>
         <Link to="/">Cancel</Link>
       </form>
+      </div>
     );
   }
 }

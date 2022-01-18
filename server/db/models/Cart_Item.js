@@ -4,6 +4,10 @@ const Product = require('./Product');
 const Order = require('./Order')
 
 const Cart_Item = db.define('Cart_Item', {
+    price: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
     total: {
         type: Sequelize.INTEGER,
         defaultValue: 0
@@ -19,6 +23,10 @@ Product.belongsToMany(Order, { through: Cart_Item });
 
 Cart_Item.prototype.priceTotal = function () {
 	//Return the sum price of all items in cart
+};
+
+const pennyConvert = (product) => {
+	product.price = product.price * 100;
 };
 
 module.exports = Cart_Item
