@@ -7,8 +7,8 @@ const Order = db.define('order', {
     defaultValue: false,
   },
   total: {
-    // type: Sequelize.INTEGER,
-    type: Sequelize.DECIMAL(10, 2),
+    type: Sequelize.INTEGER,
+    //type: Sequelize.DECIMAL(10, 2),
     defaultValue: 0,
   },
 });
