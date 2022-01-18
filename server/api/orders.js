@@ -128,17 +128,17 @@ router.post('/user/:userId/open/add/:productId', async (req, res, next) => {
 		next(err);
 	}
 })
+
+
 router.put('/:orderId', requireToken, async (req, res, next) => {
 	try {
-		console.log("USER>>>>>>", req.user)
-
-		//const orderToCheckout = await Order.findByPk(req.params.orderId);
-		/*const updatedOrder = await orderToCheckout.update({
+		console.log("USER>>>", req.user)
+		const orderToCheckout = await Order.findByPk(req.params.orderId);
+		const updatedOrder = await orderToCheckout.update({
 			completed: true
 		})
 		const newOrder = await Order.create({})
-		*/
-		//user.addOrder(newOrder)
+		user.addOrder(newOrder)
 		res.send()
 	} catch (err) {
 		next(err);
