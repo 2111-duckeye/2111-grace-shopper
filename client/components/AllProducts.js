@@ -20,7 +20,7 @@ class AllProducts extends Component {
               <div className ='card-content'>
                 <img src={product.imageURL} />
                 <h4>{product.name}</h4>
-                <h4>${product.price}</h4>
+                <h4>${(product.price/100).toFixed(2)}</h4>
                 <Link to={`/products/${product.id}`}>
                   <button type='button'>View Item</button>
                 </Link>
