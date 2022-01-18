@@ -65,7 +65,7 @@ const mapSignup = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
