@@ -5,6 +5,9 @@ import product from './product'
 export const GET_ORDER = 'GET_ORDER'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const ADD_PRODUCT = 'ADD_PRODUCT'
+export const CHECKOUT_ORDER = 'CHECKOUT_ORDER'
+
+
 const TOKEN = 'token'
 
 //action creation
@@ -23,6 +26,11 @@ export const _deleteProduct = (updatedOrder) => ({
 export const _addProduct = (updatedOrder) => ({
   type: ADD_PRODUCT,
   updatedOrder
+})
+
+export const _checkoutOrder = (checkedOutOrder) => ({
+  type: CHECKOUT_ORDER,
+  checkedOutOrder
 })
 
 //Thunk creator
@@ -102,7 +110,30 @@ export const removeOrderProduct = (productId) => {
       }
 
 
-    } catch(error) {
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const checkoutOrder = (openOrderId) => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem(TOKEN)
+      if (token) {
+        const res = await axios.get('/auth/me', {
+          headers: {
+            authorization: token
+          }
+        })
+        const { data: checkedOutOrder } = await axios.put(`/api/orders/${openOrderId}`, {
+          headers: {
+            authorization: token
+          }
+        })
+        return dispatch(_checkoutOrder(checkedOutOrder))
+      }
+    } catch (error) {
       console.error(error)
     }
   }
@@ -116,6 +147,8 @@ export default function openOrderReducer(state = {}, action) {
       return action.updatedOrder
     case ADD_PRODUCT:
       return action.updatedOrder
+    case CHECKOUT_ORDER:
+      return action.checkedOutOrder
     default:
       return state
   }
