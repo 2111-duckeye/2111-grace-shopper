@@ -13,6 +13,7 @@ class SingleProduct extends Component {
   }
 
   render() {
+
     const {product} = this.props || {};
     const {isAdmin} = this.props;
 
@@ -44,6 +45,7 @@ class SingleProduct extends Component {
             </div>) 
             : 
           ('')}
+
         </div>
       </main>
     );
@@ -56,9 +58,11 @@ const mapState = (state) => ({
   isAdmin: state.auth.isAdmin
 })
 
-const mapDispatch = (dispatch) => ({
+
+const mapDispatch = (dispatch, { history }) => ({
   fetchProduct: (id) => dispatch(fetchProduct(id)),
-  deleteProduct: (id) => dispatch(deleteProduct(id))
+  deleteProduct: (id) => dispatch(deleteProduct(id, history))
+
 })
 
 export default connect(mapState, mapDispatch)(SingleProduct);
