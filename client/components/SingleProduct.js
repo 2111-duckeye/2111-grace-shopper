@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { addProduct } from '../store/openOrder';
 import { fetchProduct, deleteProduct } from '../store';
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom';
+
 
 
 class SingleProduct extends Component {
@@ -27,8 +29,8 @@ class SingleProduct extends Component {
         <h1 className="singleItemName">{product.name}</h1>
         <p>{product.description}</p>
         <div className="product-price">
-          <span>{`$${product.price}`}</span>
-          <button type="submit" style={{margin: "3%"}}>Add to cart</button></div>   
+          <button type="addProductToCart" style={margin: "3%"} onClick={() => this.props.addProduct(product.id)}>Add to Cart</button></div>
+          <span>{`${product.price}`}</span>
           {isAdmin ? 
           ( <div>
             <Link to="/addproduct" className="admin-button">
@@ -45,7 +47,6 @@ class SingleProduct extends Component {
             </div>) 
             : 
           ('')}
-
         </div>
       </main>
     );
@@ -58,9 +59,9 @@ const mapState = (state) => ({
   isAdmin: state.auth.isAdmin
 })
 
-
-const mapDispatch = (dispatch, { history }) => ({
+const mapDispatch = (dispatch,{history}) => ({
   fetchProduct: (id) => dispatch(fetchProduct(id)),
+  addProduct: (productId) => dispatch(addProduct(productId)),
   deleteProduct: (id) => dispatch(deleteProduct(id, history))
 
 })

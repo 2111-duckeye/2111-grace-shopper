@@ -3,6 +3,7 @@ import { AddShoppingCart } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../store/products';
+import { addProduct } from '../store/openOrder';
 
 class AllProducts extends Component {
 	componentDidMount() {
@@ -23,7 +24,7 @@ class AllProducts extends Component {
 							<Link to={`/products/${product.id}`}>
 								<button type='button'>View Item</button>
 							</Link>
-							<button type={product.id} onClick={() => console.log('addProduct:', product.id)}>Add to Cart</button>
+							<button type={product.id} onClick={() => this.props.addProduct(product.id)}>Add to Cart</button>
 							{/* <button className='delete' type='delete' onClick={ () =>this.props.deleteStudent(student.id)}>X</button> */}
 						</div>
 					</div>
@@ -39,6 +40,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
 	fetchProducts: () => dispatch(fetchProducts()),
+	addProduct: (productId) => dispatch(addProduct(productId))
 });
 
 export default connect(mapState, mapDispatch)(AllProducts);
