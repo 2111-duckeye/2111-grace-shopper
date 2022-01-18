@@ -5,13 +5,13 @@ const Order = require('./Order');
 
 const Cart_Item = db.define('Cart_Item', {
   price: {
-    // type: Sequelize.INTEGER,
-    type: Sequelize.DECIMAL(10, 2),
+    type: Sequelize.INTEGER,
+    //type: Sequelize.DECIMAL(10, 2),
     defaultValue: 0,
   },
   total: {
-    // type: Sequelize.INTEGER,
-    type: Sequelize.DECIMAL(10, 2),
+    type: Sequelize.INTEGER,
+    //type: Sequelize.DECIMAL(10, 2),
     defaultValue: 0,
   },
   quantity: {

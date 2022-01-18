@@ -187,34 +187,25 @@ const products = [
 const orders = [
 	{
 		completed: true,
-		total: 15,
 		userId: 1,
-		id:1
 	},
 	{
 		completed: true,
-		total: 5097,
 		userId: 1,
-		id: 2
 	},
 	{
 		completed: false,
-		total: 35,
 		userId: 2,
-		id: 3
 	},
 	{
 		completed: false,
 		userId: 1,
-		id: 4
 	}, {
 		completed: false,
 		userId: 3,
-		id: 5
 	}, {
 		completed: false,
 		userId: 4,
-		id: 6
 	},
 ];
 
