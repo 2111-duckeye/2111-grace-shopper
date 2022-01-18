@@ -32,7 +32,7 @@ class SingleProduct extends Component {
               Add to Cart
             </button>
           </div>
-          <span>{`${product.price}`}</span>
+          <span>{`${(product.price/100).toFixed(2)}`}</span>
           {isAdmin ? (
             <div>
               <Link to="/addproduct" className="admin-button">
