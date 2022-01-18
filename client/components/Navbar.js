@@ -1,10 +1,10 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { logout } from '../store'
 import Button from 'react-bootstrap/Button'
 
-const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
+const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div className="header-container">
     <div className="header-container-left">
       <Link to="/">
@@ -16,7 +16,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
         <Button variant="light" type="button">
           <img
             className="cart-button-img"
-            src="https://image.flaticon.com/icons/png/512/34/34627.png" 
+            src="https://image.flaticon.com/icons/png/512/34/34627.png"
           />
         </Button>
       </Link>
