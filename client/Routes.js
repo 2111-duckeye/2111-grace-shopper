@@ -1,16 +1,15 @@
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { withRouter, Route, Switch, Redirect, BrowserRouter as Router } from "react-router-dom";
-import { Login, Signup } from "./components/AuthForm";
-import Home from "./components/Home";
-import { me, fetchOrder, fetchOrders } from "./store";
-import SingleProduct from "./components/SingleProduct";
-import Users from "./components/Users";
-import OrderPage from "./components/OrderPage";
-import CreateProduct from "./components/Admin/CreateProduct";
-import EditProduct from "./components/Admin/EditProduct";
-import AdminHome from "./components/Admin/AdminHome";
-
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom';
+import { Login, Signup } from './components/AuthForm';
+import Home from './components/Home';
+import { me, fetchOrder, fetchOrders } from './store';
+import SingleProduct from './components/SingleProduct';
+import Users from './components/Users';
+import OrderPage from './components/OrderPage';
+import CreateProduct from './components/Admin/CreateProduct';
+import EditProduct from './components/Admin/EditProduct';
+import AdminHome from './components/Admin/AdminHome';
 
 /* * COMPONENT */
 class Routes extends Component {
@@ -25,26 +24,28 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/order' component={OrderPage} />
-            <Route path='/products/:productId' component={SingleProduct} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/order" component={OrderPage} />
+            <Route path="/products/:productId" component={SingleProduct} />
           </Switch>
         ) : (
           <Switch>
-            <Route exact path='/' component={Home} />
-            <Route path='/login' component={Login} />
-            <Route path='signup' component={Signup} />
-            <Route path='/products/:productId' component={SingleProduct} />
-            <Route exact path='/order' component={OrderPage} />
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="signup" component={Signup} />
+            <Route path="/products/:productId" component={SingleProduct} />
+            <Route exact path="/order" component={OrderPage} />
           </Switch>
         )}
         {isLoggedIn && isAdmin ? (
           <Switch>
-            <Route exact path='/admin/home' component={AdminHome} />
-            <Route exact path='/addproduct' component={CreateProduct} />
-            <Route path='/products/:productId/edit' component={EditProduct} />
+            <Route exact path="/admin/home" component={AdminHome} />
+            <Route exact path="/addproduct" component={CreateProduct} />
+            <Route path="/products/:productId/edit" component={EditProduct} />
           </Switch>
-        ) : ''}
+        ) : (
+          ''
+        )}
       </div>
     );
   }
@@ -67,7 +68,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me());
-      dispatch(fetchOrder())
+      dispatch(fetchOrder());
     },
   };
 };
