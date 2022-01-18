@@ -14,16 +14,9 @@ const Product = db.define('product', {
     type: Sequelize.TEXT,
   },
   price: {
-    type: Sequelize.DECIMAL(10, 2),
+    type: Sequelize.INTEGER,
     allowNull: false,
   },
 });
 
 module.exports = Product;
-
-// const pennyConvert = (product) => {
-// 	product.price = product.price * 100;
-// };
-
-// Product.beforeValidate(pennyConvert);
-// Product.beforeUpdate(pennyConvert);
