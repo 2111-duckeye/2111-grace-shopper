@@ -115,7 +115,6 @@ export default function productsReducer(state = [], action) {
     default:
       return state;
   }
-
 }
 
 
