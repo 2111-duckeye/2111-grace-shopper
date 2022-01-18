@@ -1,14 +1,15 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { withRouter, Route, Switch, Redirect, BrowserRouter as Router} from "react-router-dom";
+import { withRouter, Route, Switch, Redirect, BrowserRouter as Router } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { me, fetchOrder, fetchOrders } from "./store";
 import SingleProduct from "./components/SingleProduct";
-import AllProducts from "./components/AllProducts";
 import Users from "./components/Users";
 import OrderPage from "./components/OrderPage";
-
+import CreateProduct from "./components/Admin/CreateProduct";
+import EditProduct from "./components/Admin/EditProduct";
+import AdminHome from "./components/Admin/AdminHome";
 
 
 /* * COMPONENT */
@@ -30,16 +31,18 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
-           <Route exact path='/' component={Home} />
-           <Route path='/login' component={Login} />
-           <Route path='signup' component={Signup} />
-           <Route path='/products/:productId' component={SingleProduct} />
-           <Route exact path='/order' component={OrderPage} />
+            <Route exact path='/' component={Home} />
+            <Route path='/login' component={Login} />
+            <Route path='signup' component={Signup} />
+            <Route path='/products/:productId' component={SingleProduct} />
+            <Route exact path='/order' component={OrderPage} />
           </Switch>
         )}
         {isLoggedIn && isAdmin ? (
           <Switch>
-            <Route exact path='/admin/users' component={Users} />
+            <Route exact path='/admin/home' component={AdminHome} />
+            <Route exact path='/addproduct' component={CreateProduct} />
+            <Route path='/products/:productId/edit' component={EditProduct} />
           </Switch>
         ) : ''}
       </div>
@@ -55,7 +58,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
-    isAdmin: state.auth.isAdmin,
+    isAdmin: !!state.auth.isAdmin,
     //user: state.auth
   };
 };
