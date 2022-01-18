@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const { models: {Order, Product} } = require('../db');
-//const { requireToken, isAdmin } = require('./gatekeepingMiddleware');
+const { requireToken, isAdmin, canViewOrder } = require('./gatekeepingMiddleware');
 module.exports = router;
 
-router.get('/', async (req, res, next) => {
+router.get('/', requireToken, isAdmin, async (req, res, next) => {
 	try {
 		const orders = await Order.findAll({
 			include: Product
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
-router.get('/:orderId', async (req, res, next) => {
+router.get('/:orderId', requireToken, isAdmin, async (req, res, next) => {
 	try {
 		const currentOrder = await Order.findOne({
 			include: Product,
@@ -26,7 +26,7 @@ router.get('/:orderId', async (req, res, next) => {
 	}
 });
 
-router.get('/user/:userId', async (req, res, next) => {
+router.get('/user/:userId', requireToken, canViewOrder, async (req, res, next) => {
 	try {
 		const orders = await Order.findAll({
 			include: Product,
@@ -38,7 +38,7 @@ router.get('/user/:userId', async (req, res, next) => {
 	}
 });
 
-router.get('/user/:userId/open/', async (req, res, next) => {
+router.get('/user/:userId/open/', requireToken, canViewOrder, async (req, res, next) => {
 	try {
 		const order = await Order.findOne({
 			include: Product,
