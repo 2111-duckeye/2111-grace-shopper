@@ -41,7 +41,7 @@ class OrderPage extends React.Component {
                 {products.map((product) => {
                   return (
                     <div key={product.id}>
-                      <li>{product.name}, price: ${product.price}, quantity: {product.Cart_Item.quantity}</li>
+                      <li>{product.name}, price: ${(product.price/100).toFixed(2)}, quantity: {product.Cart_Item.quantity}</li>
                       <button className='delete' type='delete' onClick={ () =>this.props.deleteProduct(product.id)}>X</button>
                     </div>
                   )
@@ -53,7 +53,7 @@ class OrderPage extends React.Component {
           )
         }
         {
-          openOrder.id ? <h1>{this.props.user.username}'s Total: ${openOrder.total}</h1> : <h1>HELLO ORDER NOT LOADED CHECK</h1>
+          openOrder.id ? <h1>{this.props.user.username}'s Total: ${(openOrder.total/100).toFixed(2)}</h1> : <h1>HELLO ORDER NOT LOADED CHECK</h1>
         }
         <a href='#' onClick={this.props.handleClick}>Logout</a>
       </div>
