@@ -5,10 +5,11 @@ import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { me, fetchOrder, fetchOrders } from "./store";
 import SingleProduct from "./components/SingleProduct";
-import AllProducts from "./components/AllProducts";
 import Users from "./components/Users";
 import OrderPage from "./components/OrderPage";
-
+import CreateProduct from "./components/Admin/CreateProduct";
+import EditProduct from "./components/Admin/EditProduct";
+import AdminHome from "./components/Admin/AdminHome";
 
 
 /* * COMPONENT */
@@ -39,7 +40,9 @@ class Routes extends Component {
         )}
         {isLoggedIn && isAdmin ? (
           <Switch>
-            <Route exact path='/admin/users' component={Users} />
+            <Route exact path='/admin/home' component={AdminHome} />
+            <Route exact path='/addproduct' component={CreateProduct} />
+            <Route path='/products/:productId/edit' component={EditProduct} />
           </Switch>
         ) : ''}
       </div>

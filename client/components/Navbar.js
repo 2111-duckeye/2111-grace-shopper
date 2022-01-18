@@ -36,6 +36,9 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
       ) : (
         <div className="header-buttons">
           {/* The navbar will show these links before you log in */}
+          <Link to="/" className="home-button">
+            <Button>Home</Button>
+          </Link>
           <Link to="/login" className="login-button">
             <Button>Login</Button>
           </Link>
