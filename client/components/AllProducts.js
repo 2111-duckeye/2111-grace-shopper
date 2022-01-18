@@ -25,7 +25,6 @@ class AllProducts extends Component {
                   <button type='button'>View Item</button>
                 </Link>
                 <button type={product.id} onClick={() => this.props.addProduct(product.id)}>Add to Cart</button>
-                {/* <button className='delete' type='delete' onClick={ () =>this.props.deleteStudent(student.id)}>X</button> */}
                </div>
 						</div>
 					</div>
