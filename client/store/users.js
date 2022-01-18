@@ -6,8 +6,8 @@ const TOKEN = 'token'
 
 //action creation
 export const setUsers = (users) => ({
-	type: GOT_USERS,
-	users,
+  type: GOT_USERS,
+  users,
 });
 
 //Thunk creator
@@ -30,10 +30,10 @@ export const fetchUsers = () => {
 };
 
 export default function usersReducer(state = [], action) {
-	switch (action.type) {
-		case GOT_USERS:
-			return action.users;
-		default:
-			return state;
-	}
+  switch (action.type) {
+    case GOT_USERS:
+      return action.users;
+    default:
+      return state;
+  }
 }
