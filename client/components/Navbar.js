@@ -1,8 +1,8 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { logout } from '../store'
-import Button from 'react-bootstrap/Button'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { logout } from '../store';
+import Button from 'react-bootstrap/Button';
 
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div className="header-container">
@@ -56,8 +56,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
       )}
     </nav>
   </div>
-)
-
+);
 
 /**
  * CONTAINER
