@@ -10,18 +10,36 @@ class SingleProduct extends Component {
   }
   render() {
     const { product } = this.props || {};
+    const { isAdmin } = this.props;
 
     return (
-      <main className='container'>
-        <div className='left-column'>
-          <img src={product.imageURL} style={{ width: "500px", height: '500px' }} />
+      <main className="container">
+        <div className="left-column">
+          <img src={product.imageURL} style={{ width: "500px", height: "500px" }} />
+
         </div>
-        <div className='right-column'>
-          <h1 className='singleItemName'>{product.name}</h1>
+        <div className="right-column">
+          <h1 className="singleItemName">{product.name}</h1>
           <p>{product.description}</p>
-          <div className='product-price'>
-            <span>{product.price}</span>
-            <button type='submit'>Add to cart</button></div>
+          <div className="product-price">
+            <span>{`$${product.price}`}</span>
+            <button type="submit" style={{ margin: "3%" }}>Add to cart</button></div>
+          {isAdmin ?
+            (<div>
+              <Link to="/addproduct" className="admin-button">
+                <Button>Create Product</Button>
+              </Link>
+              <Link to={`/products/${product.id}/edit`} className="admin-button">
+                <Button>Edit Product</Button>
+              </Link>
+              <a href="#" onClick={(evt) => {
+                evt.preventDefault()
+                this.props.deleteProduct(product.id)
+              }} className="admin-button">
+                <Button>Delete Product</Button></a>
+            </div>)
+            :
+            ('')}
         </div>
       </main>
     );
@@ -32,8 +50,9 @@ const mapState = (state) => ({
   product: state.product
 })
 
-const mapDispatch = (dispatch) => ({
-  fetchProduct: (id) => dispatch(fetchProduct(id))
+const mapDispatch = (dispatch, { history }) => ({
+  fetchProduct: (id) => dispatch(fetchProduct(id)),
+  deleteProduct: (id) => dispatch(deleteProduct(id, history))
 })
 
 export default connect(mapState, mapDispatch)(SingleProduct);
