@@ -23,7 +23,8 @@ class AllProducts extends Component {
 							<Link to={`/products/${product.id}`}>
 								<button type='button'>View Item</button>
 							</Link>
-							<button type='button'>Add to Cart</button>
+							<button type={product.id} onClick={() => console.log('addProduct:', product.id)}>Add to Cart</button>
+							{/* <button className='delete' type='delete' onClick={ () =>this.props.deleteStudent(student.id)}>X</button> */}
 						</div>
 					</div>
 				))}

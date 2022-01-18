@@ -186,26 +186,32 @@ const orders = [
 		completed: true,
 		total: 15,
 		userId: 1,
+		id:1
 	},
 	{
 		completed: true,
 		total: 5097,
 		userId: 1,
+		id: 2
 	},
 	{
 		completed: false,
 		total: 35,
 		userId: 2,
+		id: 3
 	},
 	{
 		completed: false,
 		userId: 1,
+		id: 4
 	}, {
 		completed: false,
 		userId: 3,
+		id: 5
 	}, {
 		completed: false,
 		userId: 4,
+		id: 6
 	},
 ];
 
@@ -215,36 +221,42 @@ const cartItems = [
 		productId: 20,
 		quantity: 1,
 		total: 15,
+		price: 15
 	},
 	{
 		orderId: 2,
 		productId: 4,
 		quantity: 1,
 		total: 5000,
+		price: 5000
 	},
 	{
 		orderId: 2,
 		productId: 2,
 		quantity: 1,
 		total: 52,
+		price: 52
 	},
 	{
 		orderId: 2,
 		productId: 9,
 		quantity: 1,
 		total: 45,
+		price: 45
 	},
 	{
 		orderId: 3,
 		productId: 20,
 		quantity: 1,
 		total: 15,
+		price: 15
 	},
 	{
 		orderId: 3,
 		productId: 17,
 		quantity: 1,
 		total: 20,
+		price: 20
 	},
 ];
 

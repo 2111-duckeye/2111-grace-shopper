@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { fetchOrders } from '../store/orders'
-import { fetchOrder } from '../store/openOrder';
+import { fetchOrder, removeOrderProduct } from '../store/openOrder';
 import { logout } from '../store';
+import product from '../store/product';
 
 class OrderPage extends React.Component {
   constructor() {
@@ -39,7 +40,10 @@ class OrderPage extends React.Component {
               <ol>
                 {products.map((product) => {
                   return (
-                    <li>{product.name}</li>
+                    <div key={product.id}>
+                      <li>{product.name}</li>
+                      <button className='delete' type='delete' onClick={ () =>this.props.deleteProduct(product.id)}>X</button>
+                    </div>
                   )
                 })}
               </ol>
@@ -69,7 +73,8 @@ const mapDispatch = (dispatch) => {
   return {
     loadOrders: (userId) => dispatch(fetchOrders(userId)),
     loadOpenOrder: () => dispatch(fetchOrder()),
-    handleClick: () => dispatch(logout())
+    handleClick: () => dispatch(logout()),
+    deleteProduct: (productId) => dispatch(removeOrderProduct(productId))
   }
 }
 
