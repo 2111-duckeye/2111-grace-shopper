@@ -70,11 +70,11 @@ router.post('/user/:userId/open/add/:productId', async (req, res, next) => {
 	try{
 		const order = await Order.findOne({
 			include: Product,
-      where: {
+			where: {
 				userId: req.params.userId,
 				completed: false
 			}
-    });
+		});
 
 		const productToAdd = await Product.findOne( {
 			where: {
@@ -115,11 +115,11 @@ router.post('/user/:userId/open/add/:productId', async (req, res, next) => {
 
 		const updatedOrder = await Order.findOne({
 			include: Product,
-      where: {
-				userId: req.params.userId,
-				completed: false
+			where: {
+					userId: req.params.userId,
+					completed: false
 			}
-    });
+		});
 
 		res.send(updatedOrder)
 	} catch (err) {

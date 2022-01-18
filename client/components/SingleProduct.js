@@ -24,15 +24,15 @@ class SingleProduct extends Component {
           <h1 className="singleItemName">{product.name}</h1>
           <p>{product.description}</p>
           <div className="product-price">
-            <button
+            <span>${`${(product.price/100).toFixed(2)}`}</span>
+          </div>
+          <button
               type="addProductToCart"
               style={{ margin: '3%' }}
               onClick={() => this.props.addProduct(product.id)}
             >
               Add to Cart
             </button>
-          </div>
-          <span>{`${product.price}`}</span>
           {isAdmin ? (
             <div>
               <Link to="/addproduct" className="admin-button">
