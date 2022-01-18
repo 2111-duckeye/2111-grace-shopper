@@ -21,7 +21,6 @@ class AllProducts extends Component {
                 <img src={product.imageURL} />
                 <h4>{product.name}</h4>
                 <h4>${product.price}</h4>
-                <p>{product.description}</p>
                 <Link to={`/products/${product.id}`}>
                   <button type='button'>View Item</button>
                 </Link>
