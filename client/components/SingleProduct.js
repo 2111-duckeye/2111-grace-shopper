@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchProduct } from "../store";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchProduct } from '../store';
 
 
 class SingleProduct extends Component {
@@ -9,19 +9,19 @@ class SingleProduct extends Component {
     this.props.fetchProduct(productId)
   }
   render() {
-    const {product} = this.props || {};
+    const { product } = this.props || {};
 
     return (
-      <main className="container">
-        <div className="left-column">
-        <img src={product.imageURL} style={{ width: "500px", height: "500px" }} />
+      <main className='container'>
+        <div className='left-column'>
+          <img src={product.imageURL} style={{ width: "500px", height: '500px' }} />
         </div>
-        <div className="right-column">
-        <h1 className="singleItemName">{product.name}</h1>
-        <p>{product.description}</p>
-        <div className="product-price">
-          <span>{product.price}</span>
-          <button type="submit">Add to cart</button></div>
+        <div className='right-column'>
+          <h1 className='singleItemName'>{product.name}</h1>
+          <p>{product.description}</p>
+          <div className='product-price'>
+            <span>{product.price}</span>
+            <button type='submit'>Add to cart</button></div>
         </div>
       </main>
     );

@@ -1,6 +1,9 @@
 import axios from 'axios';
 const GOT_USERS = 'GOT_USERS';
 
+const TOKEN = 'token'
+
+
 //action creation
 export const setUsers = (users) => ({
 	type: GOT_USERS,
@@ -12,12 +15,14 @@ export const fetchUsers = () => {
 	return async (dispatch) => {
 		try {
 			const token = window.localStorage.getItem(TOKEN);
-			const { data: users } = await axios.get('/api/users', {
-				headers: {
-					authorization: token,
-				},
-			});
-			dispatch(setUsers(users));
+			if (token) {
+				const { data: users } = await axios.get('/api/users', {
+					headers: {
+						authorization: token,
+					},
+				});
+				return dispatch(setUsers(users));
+			}
 		} catch (e) {
 			console.log("COULDN'T FETCH USERS", e);
 		}
