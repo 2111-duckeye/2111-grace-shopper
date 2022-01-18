@@ -9,8 +9,8 @@ const TOKEN = 'token'
 //action creation
 export const setProducts = (products) => ({
   type: GOT_PRODUCTS,
-  products
-})
+  products,
+});
 export const _createProduct = (product) => ({
   type: CREATE_PRODUCT,
   product
@@ -52,15 +52,11 @@ export const createProduct = (product, history) => {
         dispatch(_createProduct(created));
         history.push('/');
       }
-
     } catch (e) {
       console.error("COULDN'T CREATE PRODUCT", e);
     }
   };
 };
-
-
-
 
 export const updateProduct = (product, history) => {
   return async (dispatch) => {

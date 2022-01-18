@@ -18,7 +18,7 @@ class SingleProduct extends Component {
     return (
       <main className="container">
         <div className="left-column">
-          <img src={product.imageURL} style={{ width: '500px', height: '500px' }} />
+          <img src={product.imageURL} style={{ width: '500px', height: 'auto' }} />
         </div>
         <div className="right-column">
           <h1 className="singleItemName">{product.name}</h1>
