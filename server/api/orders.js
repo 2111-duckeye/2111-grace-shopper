@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { models: {Order, Product, Cart_Item} } = require('../db');
+const { models: { Order, Product, Cart_Item } } = require('../db');
+const User = require('../db/models/User');
 const { requireToken, isAdmin, canViewOrder } = require('./gatekeepingMiddleware');
 module.exports = router;
 
@@ -18,20 +19,22 @@ router.get('/:orderId', requireToken, isAdmin, async (req, res, next) => {
 	try {
 		const currentOrder = await Order.findOne({
 			include: Product,
-      where: { id: req.params.orderId }
-    });
+			where: { id: req.params.orderId }
+		});
 		res.json(currentOrder);
 	} catch (err) {
 		next(err);
 	}
 });
 
+
+
 router.get('/user/:userId', requireToken, canViewOrder, async (req, res, next) => {
 	try {
 		const orders = await Order.findAll({
 			include: Product,
-      where: { userId: req.params.userId }
-    });
+			where: { userId: req.params.userId }
+		});
 		res.json(orders);
 	} catch (err) {
 		next(err);
@@ -42,11 +45,11 @@ router.get('/user/:userId/open/', requireToken, canViewOrder, async (req, res, n
 	try {
 		const order = await Order.findOne({
 			include: Product,
-      where: {
-				userId: req.params.userId,
+			where: {
+				userId: req.user.id,
 				completed: false
 			}
-    });
+		});
 
 		const itemsInCart = await Cart_Item.findAll({
 			where: {
@@ -58,13 +61,14 @@ router.get('/user/:userId/open/', requireToken, canViewOrder, async (req, res, n
 			return acc += product.dataValues.price * product.dataValues.quantity
 		}, 0)
 
-		await order.update({total})
+		await order.update({ total })
 
 		res.json(order);
 	} catch (err) {
 		next(err);
 	}
 });
+
 
 router.post('/user/:userId/open/add/:productId', requireToken, async (req, res, next) => {
 	try{
@@ -76,7 +80,7 @@ router.post('/user/:userId/open/add/:productId', requireToken, async (req, res, 
 			}
 		});
 
-		const productToAdd = await Product.findOne( {
+		const productToAdd = await Product.findOne({
 			where: {
 				id: req.params.productId
 			}
@@ -126,15 +130,31 @@ router.post('/user/:userId/open/add/:productId', requireToken, async (req, res, 
 	}
 })
 
+
+router.put('/:orderId', requireToken, async (req, res, next) => {
+	try {
+		const orderToCheckout = await Order.findByPk(req.params.orderId);
+		const updatedOrder = await orderToCheckout.update({
+			completed: true
+		})
+		const newOrder = await Order.create({})
+		const user = await User.findByPk(req.user.id)
+		user.addOrder(newOrder)
+		res.send()
+	} catch (err) {
+		next(err);
+	}
+})
+
 router.delete('/user/:userId/open/delete/:productId', async (req, res, next) => {
-  try {
+	try {
 		const order = await Order.findOne({
 			include: Product,
-      where: {
+			where: {
 				userId: req.params.userId,
 				completed: false
 			}
-    });
+		});
 
 		const products = order.products.filter(product => `${product.dataValues.id}` !== req.params.productId)
 
@@ -150,20 +170,20 @@ router.delete('/user/:userId/open/delete/:productId', async (req, res, next) => 
 			return acc += product.dataValues.price * product.dataValues.quantity
 		}, 0)
 
-		await order.update({total})
+		await order.update({ total })
 
 		const updatedOrder = await Order.findOne({
 			include: Product,
-      where: {
+			where: {
 				userId: req.params.userId,
 				completed: false
 			}
-    });
+		});
 
-    res.send(updatedOrder)
-  } catch (error) {
-    next (error)
-  }
+		res.send(updatedOrder)
+	} catch (error) {
+		next(error)
+	}
 })
 
 

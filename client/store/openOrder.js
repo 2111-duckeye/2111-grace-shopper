@@ -1,9 +1,9 @@
-import { NextWeek } from '@material-ui/icons'
 import axios from 'axios'
 
 export const GET_ORDER = 'GET_ORDER'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const ADD_PRODUCT = 'ADD_PRODUCT'
+export const CHECKOUT_ORDER = 'CHECKOUT_ORDER'
 export const CLEAR_ORDER = 'CLEAR_ORDER'
 
 const TOKEN = 'token'
@@ -29,6 +29,12 @@ export const _addProduct = (order) => ({
 export const _updateQuantity = (updatedOrder) => ({
   type: UPDATE_QUANTITY,
   updatedOrder
+})
+
+
+export const _checkoutOrder = (checkedOutOrder) => ({
+  type: CHECKOUT_ORDER,
+  checkedOutOrder
 })
 
 export const _clearOrder = () => ({
@@ -113,7 +119,26 @@ export const removeOrderProduct = (productId) => {
       }
 
 
-    } catch(error) {
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const checkoutOrder = (openOrder, history) => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem(TOKEN)
+      if (token) {
+        const { data: checkedOutOrder } = await axios.put(`/api/orders/${openOrder.id}`, openOrder, {
+          headers: {
+            authorization: token
+          }
+        })
+        dispatch(_checkoutOrder(checkedOutOrder))
+        history.push('/confirmation')
+      }
+    } catch (error) {
       console.error(error)
     }
   }
@@ -127,8 +152,10 @@ export default function openOrderReducer(state = {}, action) {
       return action.updatedOrder
     case ADD_PRODUCT:
       return action.order
-      case CLEAR_ORDER:
-        return action.order
+    case CHECKOUT_ORDER:
+      return action.checkedOutOrder      
+    case CLEAR_ORDER:
+      return action.order
     default:
       return state
   }
