@@ -37,7 +37,8 @@
     "pg": "^8.5.1",
     "postinstall": "^0.7.4",
     "react-bootstrap": "^2.1.0",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "ts-node": "^10.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
