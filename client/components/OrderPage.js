@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { fetchOrders } from '../store/orders'
-import { fetchOrder, removeOrderProduct} from '../store/openOrder';
-import { logout } from '../store';
+import { fetchOrder, removeOrderProduct, checkoutOrder} from '../store/openOrder';
+import product from '../store/product';
 import { addProduct, _clearOrder } from '../store/openOrder';
+
 
 class OrderPage extends React.Component {
   constructor() {
@@ -14,23 +15,25 @@ class OrderPage extends React.Component {
       loadedUserOrder: false,
       updatedOrder: false
     }
+
     this.handleSelect = this.handleSelect.bind(this)
   }
 
   handleSelect(evt) {
     this.props.addProduct(evt.target.id, evt.target.value)
     this.setState({updatedOrder: true})
+
   }
 
   componentDidMount() {
-    this.setState({loading: false})
+    this.setState({ loading: false })
     this.props.loadOpenOrder()
     this.props.loadOrders()
   }
 
   componentDidUpdate() {
-    if(!this.state.loadedUserOrder && this.props.user.id){
-      this.setState({loadedUserOrder: true})
+    if (!this.state.loadedUserOrder && this.props.user.id) {
+      this.setState({ loadedUserOrder: true })
     }
     if(this.state.updatedOrder && !this.props.openOrder.id) {
       console.log('updated Order')
@@ -93,7 +96,13 @@ class OrderPage extends React.Component {
             </div>) : <h2>Nothing in Cart</h2>
         }
         {
-          openOrder.id ? <h1>{this.props.user.username}'s Total: ${(openOrder.total/100).toFixed(2)}</h1> : <h1>Loading</h1>
+
+          openOrder.id ? (
+            <div>
+              <h1>{this.props.user.username}'s Total: ${(openOrder.total / 100).toFixed(2)}</h1>
+              <button className='checkout' type='checkout' onClick={() => this.props.checkout(openOrder)}>Checkout</button>
+            </div>
+          ) : <h1>Loading</h1>
         }
       </div>
     );
@@ -108,12 +117,12 @@ const mapState = (state) => {
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, {history}) => {
   return {
     loadOrders: (userId) => dispatch(fetchOrders(userId)),
     loadOpenOrder: () => dispatch(fetchOrder()),
-    handleClick: () => dispatch(logout()),
     deleteProduct: (productId) => dispatch(removeOrderProduct(productId)),
+    checkout: (openOrder) => dispatch(checkoutOrder(openOrder, history)),
     addProduct: (productId, newQuantity) => dispatch(addProduct(productId, newQuantity)),
     clearOrder: () => dispatch(_clearOrder())
   }
