@@ -185,73 +185,75 @@ const products = [
 //name, description, price, imageURL
 //{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
 const orders = [
-	{
-		completed: true,
-		userId: 1,
-	},
-	{
-		completed: true,
-		userId: 1,
-	},
-	{
-		completed: false,
-		userId: 2,
-	},
-	{
-		completed: false,
-		userId: 1,
-	}, {
-		completed: false,
-		userId: 3,
-	}, {
-		completed: false,
-		userId: 4,
-	},
+  {
+    completed: true,
+    userId: 1,
+  },
+  {
+    completed: true,
+    userId: 1,
+  },
+  {
+    completed: false,
+    userId: 2,
+  },
+  {
+    completed: false,
+    userId: 1,
+  },
+  {
+    completed: false,
+    userId: 3,
+  },
+  {
+    completed: false,
+    userId: 4,
+  },
 ];
 
 const cartItems = [
-	{
-		orderId: 1,
-		productId: 20,
-		quantity: 1,
-		total: 1500,
-		price: 1500
-	},
-	{
-		orderId: 2,
-		productId: 4,
-		quantity: 1,
-		total: 5000,
-		price: 5000
-	},
-	{
-		orderId: 2,
-		productId: 2,
-		quantity: 1,
-		total: 5200,
-		price: 5200
-	},
-	{
-		orderId: 2,
-		productId: 9,
-		quantity: 1,
-		total: 4500,
-		price: 4500
-	},
-	{
-		orderId: 3,
-		productId: 20,
-		quantity: 1,
-		total: 1500,
-		price: 1500
-	},
-	{
-		orderId: 3,
-		productId: 17,
-		quantity: 1,
-		total: 2000,
-		price: 2000
-	},
+  {
+    orderId: 1,
+    productId: 20,
+    quantity: 1,
+    total: 1500,
+    price: 1500,
+  },
+  {
+    orderId: 2,
+    productId: 4,
+    quantity: 1,
+    total: 5000,
+    price: 5000,
+  },
+  {
+    orderId: 2,
+    productId: 2,
+    quantity: 1,
+    total: 5200,
+    price: 5200,
+  },
+  {
+    orderId: 2,
+    productId: 9,
+    quantity: 1,
+    total: 4500,
+    price: 4500,
+  },
+  {
+    orderId: 3,
+    productId: 20,
+    quantity: 1,
+    total: 1500,
+    price: 1500,
+  },
+  {
+    orderId: 3,
+    productId: 17,
+    quantity: 1,
+    total: 2000,
+    price: 2000,
+  },
 ];
 
 const seed = async () => {
