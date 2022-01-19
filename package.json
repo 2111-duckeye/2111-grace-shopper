@@ -19,6 +19,7 @@
     "test:dev:routes": "npm run test:dev -- --grep=route"
   },
   "author": "Fullstack Academy of Code",
+  "type": "module",
   "license": "MIT",
   "dependencies": {
     "@chec/commerce.js": "^2.8.0",
