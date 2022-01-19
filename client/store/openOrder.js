@@ -1,12 +1,10 @@
-import { NextWeek } from '@material-ui/icons'
 import axios from 'axios'
-import product from './product'
 
 export const GET_ORDER = 'GET_ORDER'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const ADD_PRODUCT = 'ADD_PRODUCT'
 export const CHECKOUT_ORDER = 'CHECKOUT_ORDER'
-
+export const CLEAR_ORDER = 'CLEAR_ORDER'
 
 const TOKEN = 'token'
 
@@ -23,14 +21,25 @@ export const _deleteProduct = (updatedOrder) => ({
   updatedOrder
 })
 
-export const _addProduct = (updatedOrder) => ({
+export const _addProduct = (order) => ({
   type: ADD_PRODUCT,
+  order
+})
+
+export const _updateQuantity = (updatedOrder) => ({
+  type: UPDATE_QUANTITY,
   updatedOrder
 })
+
 
 export const _checkoutOrder = (checkedOutOrder) => ({
   type: CHECKOUT_ORDER,
   checkedOutOrder
+})
+
+export const _clearOrder = () => ({
+  type: CLEAR_ORDER,
+  order: {}
 })
 
 //Thunk creator
@@ -61,7 +70,7 @@ export const fetchOrder = () => {
   }
 }
 
-export const addProduct = (productId) => {
+export const addProduct = (productId, newQuantity = 0) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN)
@@ -73,13 +82,13 @@ export const addProduct = (productId) => {
           }
         })
 
-        const { data: updatedOrder } = await axios.post(`/api/orders/user/${res.data.id}/open/add/${productId}`, {
+        const { data: order } = await axios.post(`/api/orders/user/${res.data.id}/open/add/${productId}`, {quantity: newQuantity} , {
           headers: {
             authorization: token
           }
         })
 
-        return dispatch(_addProduct(updatedOrder))
+        return dispatch(_addProduct(order))
       }
 
     } catch (err) {
@@ -116,22 +125,18 @@ export const removeOrderProduct = (productId) => {
   }
 }
 
-export const checkoutOrder = (openOrder) => {
+export const checkoutOrder = (openOrder, history) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN)
       if (token) {
-        // const res = await axios.get('/auth/me', {
-        //   headers: {
-        //     authorization: token
-        //   }
-        // })
         const { data: checkedOutOrder } = await axios.put(`/api/orders/${openOrder.id}`, openOrder, {
           headers: {
             authorization: token
           }
         })
-        return dispatch(_checkoutOrder(checkedOutOrder))
+        dispatch(_checkoutOrder(checkedOutOrder))
+        history.push('/confirmation')
       }
     } catch (error) {
       console.error(error)
@@ -146,9 +151,11 @@ export default function openOrderReducer(state = {}, action) {
     case DELETE_PRODUCT:
       return action.updatedOrder
     case ADD_PRODUCT:
-      return action.updatedOrder
+      return action.order
     case CHECKOUT_ORDER:
-      return action.checkedOutOrder
+      return action.checkedOutOrder      
+    case CLEAR_ORDER:
+      return action.order
     default:
       return state
   }

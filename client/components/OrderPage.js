@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { fetchOrders } from '../store/orders'
-import { fetchOrder, removeOrderProduct, checkoutOrder } from '../store/openOrder';
-import { logout } from '../store';
+import { fetchOrder, removeOrderProduct, checkoutOrder} from '../store/openOrder';
 import product from '../store/product';
-import { Switch, Redirect } from 'react-router-dom';
+import { addProduct, _clearOrder } from '../store/openOrder';
 
 
 class OrderPage extends React.Component {
@@ -12,9 +12,17 @@ class OrderPage extends React.Component {
     super()
     this.state = {
       loading: true,
-      loadedUserOrder: false
+      loadedUserOrder: false,
+      updatedOrder: false
     }
-    this.handleClick = this.handleClick.bind(this)
+
+    this.handleSelect = this.handleSelect.bind(this)
+  }
+
+  handleSelect(evt) {
+    this.props.addProduct(evt.target.id, evt.target.value)
+    this.setState({updatedOrder: true})
+
   }
 
   componentDidMount() {
@@ -27,15 +35,12 @@ class OrderPage extends React.Component {
     if (!this.state.loadedUserOrder && this.props.user.id) {
       this.setState({ loadedUserOrder: true })
     }
+    if(this.state.updatedOrder && !this.props.openOrder.id) {
+      console.log('updated Order')
+      this.props.loadOpenOrder()
+      this.setState({updatedOrder: false})
+    }
   }
-
-  /*handleClick(evt) {
-    evt.preventDefault();
-    this.props.checkout(openOrder)
-     <Switch>< Redirect to='/confirmation' /></Switch>
-  }
-  */
-
 
   render() {
     let orders = [...this.props.orders] || []
@@ -46,30 +51,58 @@ class OrderPage extends React.Component {
       <div>
         <h2>Items in Cart:</h2>
         {
-          products.length ? (
-            <div>
-              <ol>
-                {products.map((product) => {
-                  return (
-                    <div key={product.id}>
-                      <li>{product.name}, price: ${(product.price / 100).toFixed(2)}, quantity: {product.Cart_Item.quantity}</li>
-                      <button className='delete' type='delete' onClick={() => this.props.deleteProduct(product.id)}>X</button>
+          products.length ?
+            (<div className='container'>
+              {products.map((product) => {
+                let quantityToPopulate = []
+
+                for (let i = 1; i <= product.Cart_Item.quantity + 6; i++) {
+                  quantityToPopulate.push(i)
+                }
+
+                  return (<div className='card' key={product.id}>
+                    <div className='card-header'>
+                      <div className ='card-content'>
+                        <img src={product.imageURL} />
+                        <h4>{product.name}</h4>
+                        <h4>${(product.price/100).toFixed(2)}</h4>
+                        <Link to={`/products/${product.id}`}>
+                          <button type='button'>View Item</button>
+                        </Link>
+                        {
+                            <div>Quantity:
+                              <select name="quantity" id={product.id} onChange={this.handleSelect} value={product.Cart_Item.quantity}>
+
+                                {
+                                  quantityToPopulate.map((number) => {
+                                    return (
+                                      <option key={number} value={number}>{number}</option>
+                                    )
+                                  })
+                                }
+
+                              </select>
+                              <button className='delete' type='delete' onClick={ () =>this.props.deleteProduct(product.id)}>Remove From Cart</button>
+                            </div>
+                          }
+
+                      </div>
                     </div>
-                  )
-                })}
-              </ol>
-            </div>
-          ) : (
-            <h2>Nothing in Cart</h2>
-          )
+                  </div>
+                )
+              }
+
+              )}
+            </div>) : <h2>Nothing in Cart</h2>
         }
         {
+
           openOrder.id ? (
             <div>
               <h1>{this.props.user.username}'s Total: ${(openOrder.total / 100).toFixed(2)}</h1>
               <button className='checkout' type='checkout' onClick={() => this.props.checkout(openOrder)}>Checkout</button>
             </div>
-          ) : <h1>HELLO ORDER NOT LOADED CHECK</h1>
+          ) : <h1>Loading</h1>
         }
       </div>
     );
@@ -84,13 +117,14 @@ const mapState = (state) => {
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, {history}) => {
   return {
     loadOrders: (userId) => dispatch(fetchOrders(userId)),
     loadOpenOrder: () => dispatch(fetchOrder()),
-    handleClick: () => dispatch(logout()),
     deleteProduct: (productId) => dispatch(removeOrderProduct(productId)),
-    checkout: (openOrder) => dispatch(checkoutOrder(openOrder))
+    checkout: (openOrder) => dispatch(checkoutOrder(openOrder, history)),
+    addProduct: (productId, newQuantity) => dispatch(addProduct(productId, newQuantity)),
+    clearOrder: () => dispatch(_clearOrder())
   }
 }
 
