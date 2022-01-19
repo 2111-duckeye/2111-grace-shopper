@@ -21,3 +21,4 @@ React
 Redux
 JSON Web Token
 Heroku Deployment
+Bootstrap
