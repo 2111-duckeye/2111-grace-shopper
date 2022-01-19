@@ -4,7 +4,7 @@
 https://cat-supply.herokuapp.com/
 
 
-Duckeye Emporium is an e-commerce site dedicated to seeling the finest cat supplies on the market.
+Duckeye Emporium is an e-commerce site dedicated to selling the finest cat supplies on the market.
 
 This website was created by:
 
