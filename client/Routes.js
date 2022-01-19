@@ -10,6 +10,7 @@ import OrderPage from './components/OrderPage';
 import CreateProduct from './components/Admin/CreateProduct';
 import EditProduct from './components/Admin/EditProduct';
 import AdminHome from './components/Admin/AdminHome';
+import OrderHistory from './components/OrderHistory';
 import { Confirmation } from './components/Confirmation'
 
 /* * COMPONENT */
@@ -27,6 +28,7 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/order" component={OrderPage} />
+            <Route exact path="/user/order-history" component={OrderHistory}/>
             <Route exact path="/confirmation" component={Confirmation} />
             <Route path="/products/:productId" component={SingleProduct} />
             <Redirect from="/login" to="/" />
