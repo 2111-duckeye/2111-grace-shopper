@@ -8,17 +8,22 @@ Duckeye Emporium is an e-commerce site dedicated to seeling the finest cat suppl
 
 This website was created by:
 
-Quynh Le
-Ellie Ly
-Melissa Moy
+Quynh Le, 
+Ellie Ly, 
+Melissa Moy, 
 Yooboo Park
 
 We used the following software in out project;
 
-Express
-Sequelize
-React
-Redux
-JSON Web Token
-Heroku Deployment
-Bootstrap
+Express, 
+Sequelize, 
+React, 
+Redux, 
+JSON Web Token, 
+Heroku Deployment, 
+Bootstrap, 
+
+To view our project in local host run:
+
+On mac - npm run start:dev
+On windows - npm run start-server:windows & npm run build:dev
