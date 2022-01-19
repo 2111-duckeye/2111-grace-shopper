@@ -2,6 +2,7 @@ import axios from 'axios'
 import history from '../history'
 
 const TOKEN = 'token'
+const guestCart = 'guestCart'
 
 /**
  * ACTION TYPES
@@ -41,6 +42,7 @@ export const authenticate = (username, password, email, method) => async dispatc
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN)
+  window.localStorage.setItem(guestCart, JSON.stringify({ items: [] }))
   history.push('/login')
   return {
     type: SET_AUTH,
