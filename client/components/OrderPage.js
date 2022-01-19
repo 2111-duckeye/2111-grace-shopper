@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { fetchOrders } from '../store/orders'
-import { fetchOrder, removeOrderProduct, updateQuantity } from '../store/openOrder';
+import { fetchOrder, removeOrderProduct} from '../store/openOrder';
 import { logout } from '../store';
 import { addProduct, _clearOrder } from '../store/openOrder';
-import product from '../store/product';
 
 class OrderPage extends React.Component {
   constructor() {
