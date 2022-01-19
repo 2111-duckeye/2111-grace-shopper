@@ -25,10 +25,12 @@ class OrderHistory extends Component {
             <div>
             <h2>ORDERS:</h2>
                 <div className='container'>
-                    {orders.map((order)=>{
+                    {orders.map((order,index)=>{
                         return(
                             <div key={order.id}>
-                                <h3>Order #{order.id}</h3>
+                                {(order.completed)?(
+                                    <div>
+                                <h3>Order #{index+1}</h3>
                                 {order.products.map((product) => {
                                     return (
                                         <div className='card' key={product.id}>
@@ -37,6 +39,7 @@ class OrderHistory extends Component {
                                                     <img src={product.imageURL} />
                                                     <h4>{product.name}</h4>
                                                     <h4>${(product.price/100).toFixed(2)}</h4>
+                                                    <h4>Quantity:{product.Cart_Item.quantity}</h4>
                                                     <Link to={`/products/${product.id}`}>
                                                         <button type='button'>View Item</button>
                                                     </Link>
@@ -45,6 +48,8 @@ class OrderHistory extends Component {
                                         </div>
                                     )
                                 })}
+                                </div>
+                                ):("")} 
                             </div>
                         )
                     })} 
