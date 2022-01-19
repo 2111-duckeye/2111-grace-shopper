@@ -4,6 +4,8 @@ import { fetchOrders } from '../store/orders'
 import { fetchOrder, removeOrderProduct, checkoutOrder } from '../store/openOrder';
 import { logout } from '../store';
 import product from '../store/product';
+import { Switch, Redirect } from 'react-router-dom';
+
 
 class OrderPage extends React.Component {
   constructor() {
@@ -12,6 +14,7 @@ class OrderPage extends React.Component {
       loading: true,
       loadedUserOrder: false
     }
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
@@ -25,6 +28,14 @@ class OrderPage extends React.Component {
       this.setState({ loadedUserOrder: true })
     }
   }
+
+  /*handleClick(evt) {
+    evt.preventDefault();
+    this.props.checkout(openOrder)
+     <Switch>< Redirect to='/confirmation' /></Switch>
+  }
+  */
+
 
   render() {
     let orders = [...this.props.orders] || []
@@ -41,7 +52,7 @@ class OrderPage extends React.Component {
                 {products.map((product) => {
                   return (
                     <div key={product.id}>
-                      <li>{product.name}, price: {`${product.price}`}, quantity: {product.Cart_Item.quantity}</li>
+                      <li>{product.name}, price: ${(product.price / 100).toFixed(2)}, quantity: {product.Cart_Item.quantity}</li>
                       <button className='delete' type='delete' onClick={() => this.props.deleteProduct(product.id)}>X</button>
                     </div>
                   )
@@ -55,12 +66,11 @@ class OrderPage extends React.Component {
         {
           openOrder.id ? (
             <div>
-              <h1>{this.props.user.username}'s Total: {`${openOrder.total}`}</h1>
-              <button className='checkout' type='checkout' onClick={() => this.props.checkout(openOrder.id)}>Checkout</button>
+              <h1>{this.props.user.username}'s Total: ${(openOrder.total / 100).toFixed(2)}</h1>
+              <button className='checkout' type='checkout' onClick={() => this.props.checkout(openOrder)}>Checkout</button>
             </div>
           ) : <h1>HELLO ORDER NOT LOADED CHECK</h1>
         }
-        <a href='#' onClick={this.props.handleClick}>Logout</a>
       </div>
     );
   }
@@ -80,7 +90,7 @@ const mapDispatch = (dispatch) => {
     loadOpenOrder: () => dispatch(fetchOrder()),
     handleClick: () => dispatch(logout()),
     deleteProduct: (productId) => dispatch(removeOrderProduct(productId)),
-    checkout: (orderId) => dispatch(checkoutOrder(orderId))
+    checkout: (openOrder) => dispatch(checkoutOrder(openOrder))
   }
 }
 

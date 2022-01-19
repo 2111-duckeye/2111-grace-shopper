@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { models: { Order, Product, Cart_Item } } = require('../db');
+const User = require('../db/models/User');
 const { requireToken, isAdmin, canViewOrder } = require('./gatekeepingMiddleware');
 module.exports = router;
 
@@ -132,12 +133,12 @@ router.post('/user/:userId/open/add/:productId', async (req, res, next) => {
 
 router.put('/:orderId', requireToken, async (req, res, next) => {
 	try {
-		console.log("USER>>>", req.user)
 		const orderToCheckout = await Order.findByPk(req.params.orderId);
 		const updatedOrder = await orderToCheckout.update({
 			completed: true
 		})
 		const newOrder = await Order.create({})
+		const user = await User.findByPk(req.user.id)
 		user.addOrder(newOrder)
 		res.send()
 	} catch (err) {

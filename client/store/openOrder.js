@@ -116,7 +116,7 @@ export const removeOrderProduct = (productId) => {
   }
 }
 
-export const checkoutOrder = (openOrderId) => {
+export const checkoutOrder = (openOrder) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN)
@@ -126,7 +126,7 @@ export const checkoutOrder = (openOrderId) => {
         //     authorization: token
         //   }
         // })
-        const { data: checkedOutOrder } = await axios.put(`/api/orders/${openOrderId}`, {
+        const { data: checkedOutOrder } = await axios.put(`/api/orders/${openOrder.id}`, openOrder, {
           headers: {
             authorization: token
           }
