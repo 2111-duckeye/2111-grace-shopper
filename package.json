@@ -1,7 +1,7 @@
 {
   "name": "grace_shopper",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Cat Supplies e-commerces!",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
@@ -19,6 +19,7 @@
     "test:dev:routes": "npm run test:dev -- --grep=route"
   },
   "author": "Fullstack Academy of Code",
+  "type": "module",
   "license": "MIT",
   "dependencies": {
     "@chec/commerce.js": "^2.8.0",
@@ -66,5 +67,8 @@
     "supertest": "^4.0.2",
     "webpack": "^5.15.0",
     "webpack-cli": "^4.3.1"
+  },
+  "engines": {
+    "node": "16.10.0"
   }
 }
