@@ -1,4 +1,4 @@
-const User = require('../db/models/user');
+const User = require('../db/models/User');
 
 const requireToken = async (req, res, next) => {
   try {
@@ -21,14 +21,14 @@ const isAdmin = (req, res, next) => {
 
 const canViewOrder = (req, res, next) => {
   if (req.user.isAdmin || `${req.user.dataValues.id}` === req.params.userId) {
-    next()
+    next();
   } else {
-    return res.status(403).send('Cannot view other users orders')
+    return res.status(403).send('Cannot view other users orders');
   }
-}
+};
 
 module.exports = {
   requireToken,
   isAdmin,
-  canViewOrder
+  canViewOrder,
 };
