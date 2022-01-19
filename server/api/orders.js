@@ -66,27 +66,6 @@ router.get('/user/:userId/open/', requireToken, canViewOrder, async (req, res, n
 	}
 });
 
-router.get('user/:userId/open/update/:productId', async (req, res, next) => {
-	try{
-		console.log('get works')
-		res.send()
-	} catch (err) {
-		console.error('error here')
-		next(err)
-	}
-})
-
-router.put('user/:userId/open/update/:productId', requireToken, async(req, res, next) => {
-	try {
-		console.log('req', req.body)
-		console.log('in update')
-		res.send()
-	} catch (e) {
-		console.error("can at least find route")
-		next(e)
-	}
-})
-
 router.post('/user/:userId/open/add/:productId', requireToken, async (req, res, next) => {
 	try{
 		let order = await Order.findOne({
