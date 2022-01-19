@@ -66,9 +66,9 @@ router.get('/user/:userId/open/', requireToken, canViewOrder, async (req, res, n
 	}
 });
 
-router.post('/user/:userId/open/add/:productId', async (req, res, next) => {
+router.post('/user/:userId/open/add/:productId', requireToken, async (req, res, next) => {
 	try{
-		const order = await Order.findOne({
+		let order = await Order.findOne({
 			include: Product,
 			where: {
 				userId: req.params.userId,
@@ -91,7 +91,6 @@ router.post('/user/:userId/open/add/:productId', async (req, res, next) => {
 		const itemIds = itemsInCart.map(product => product.dataValues.productId)
 
 		if(itemIds.includes(productToAdd.id)){
-			console.log("already has item")
 			const productInCart = await Cart_Item.findOne({
 				where: {
 					productId: productToAdd.id,
@@ -99,10 +98,18 @@ router.post('/user/:userId/open/add/:productId', async (req, res, next) => {
 				}
 			})
 
-			productInCart.update({
-				quantity: productInCart.quantity + 1,
-				total: productInCart.total + productToAdd.price
-			})
+			if(req.body.quantity === 0) {
+				productInCart.update({
+					quantity: productInCart.quantity + 1,
+					total: productInCart.total + productToAdd.price
+				})
+			} else {
+				productInCart.update({
+					quantity: req.body.quantity,
+					total: productInCart.quantity * productToAdd.price
+				})
+			}
+
 		} else {
 			order.addProduct(productToAdd, {
 				through: {
@@ -113,15 +120,7 @@ router.post('/user/:userId/open/add/:productId', async (req, res, next) => {
 			})
 		}
 
-		const updatedOrder = await Order.findOne({
-			include: Product,
-			where: {
-					userId: req.params.userId,
-					completed: false
-			}
-		});
-
-		res.send(updatedOrder)
+		res.send({})
 	} catch (err) {
 		next(err);
 	}
