@@ -1,14 +1,23 @@
-# Duckeye Cat Supply
+# Duckeye Emporium
 
 ## Heroku
 https://cat-supply.herokuapp.com/
 
 
-## Start
+Duckeye Emporium is an e-commerce site dedicated to seeling the finest cat supplies on the market.
 
-Sync and seed your database by running `npm run seed`. Running `npm run start:dev` will make great things happen!
+This website was created by:
 
-- start:dev will both start your server and build your client side files using webpack
-- start:dev:logger is the same as start:dev, but you will see your SQL queries (can be helpful for debugging)
-- start:dev:seed will start your server and also seed your database (this is useful when you are making schema changes and you don't want to run your seed script separately)
+Quynh Le
+Ellie Ly
+Melissa Moy
+Yooboo Park
 
+We used the following software in out project;
+
+Express
+Sequelize
+React
+Redux
+JSON Web Token
+Heroku Deployment
