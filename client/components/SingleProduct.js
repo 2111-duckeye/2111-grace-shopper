@@ -31,7 +31,7 @@ class SingleProduct extends Component {
             style={{ margin: '3%' }}
             onClick={() => {
               this.props.addProduct(product.id);
-              window.location.reload();
+              //window.location.reload();
             }}
           >
             Add to Cart
