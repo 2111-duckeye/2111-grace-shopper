@@ -34,6 +34,7 @@ class OrderPage extends React.Component {
     if (!this.state.loadedUserOrder && this.props.user.id) {
       this.setState({ loadedUserOrder: true });
     }
+
     if (this.state.updatedOrder && !this.props.openOrder.id) {
       this.props.loadOpenOrder();
       this.setState({ updatedOrder: false });
