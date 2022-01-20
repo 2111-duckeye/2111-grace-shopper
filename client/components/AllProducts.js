@@ -11,11 +11,7 @@ class AllProducts extends Component {
     this.props.loadOpenOrder()
   }
 
-<<<<<<< Updated upstream
-  render() {
-=======
 	render() {
->>>>>>> Stashed changes
     const products = this.props.products || [];
     return (
       <div className="container">
@@ -33,11 +29,7 @@ class AllProducts extends Component {
                   type={product.id}
                   onClick={() => {
                     this.props.addProduct(product.id);
-<<<<<<< Updated upstream
-                    window.location.reload();
-=======
                     //window.location.reload();
->>>>>>> Stashed changes
                   }}
                 >
                   Add to Cart
@@ -57,14 +49,9 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-<<<<<<< Updated upstream
-  fetchProducts: () => dispatch(fetchProducts()),
-  addProduct: (productId) => dispatch(addProduct(productId)),
-=======
 	fetchProducts: () => dispatch(fetchProducts()),
 	addProduct: (productId) => dispatch(addProduct(productId)),
   loadOpenOrder: () => dispatch(fetchOrder()),
->>>>>>> Stashed changes
 });
 
 export default connect(mapState, mapDispatch)(AllProducts);

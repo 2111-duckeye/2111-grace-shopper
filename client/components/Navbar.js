@@ -5,40 +5,6 @@ import { logout } from '../store';
 import { fetchOrder } from '../store/openOrder';
 import Button from 'react-bootstrap/Button';
 
-<<<<<<< Updated upstream
-const Navbar = ({ handleClick, isLoggedIn, isAdmin, openOrder }) => (
-  <div className="header-container">
-    <div className="header-container-left">
-      <Link to="/">
-        <h2 className="duckeye-title">Duckeye Emporium</h2>
-      </Link>
-    </div>
-    <nav className="header-container-right">
-      <Link to="/order">
-        <Button variant="light" type="button">
-          <img
-            className="cart-button-img"
-            src="https://image.flaticon.com/icons/png/512/34/34627.png"
-          />
-          {openOrder.products === undefined
-            ? ''
-            : `(${openOrder.products
-                .map((items) => parseInt(items.Cart_Item.quantity, 10))
-                .reduce((prev, curr) => prev + curr, 0)})`}
-        </Button>
-      </Link>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/" className="home-button">
-            <Button>Home</Button>
-          </Link>
-          <a href="#" onClick={handleClick} className="logout-button">
-            <Button>Logout</Button>
-          </a>
-          <Link to="/user/order-history" className="signup-button">
-            <Button>Order History</Button>
-=======
 class Navbar extends React.Component {
   componentDidMount() {
     this.props.loadOpenOrder()
@@ -62,7 +28,6 @@ class Navbar extends React.Component {
         <div className="header-container-left">
           <Link to="/">
             <h2 className="duckeye-title">Duckeye Emporium</h2>
->>>>>>> Stashed changes
           </Link>
         </div>
         <nav className="header-container-right">
