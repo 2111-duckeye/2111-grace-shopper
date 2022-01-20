@@ -3,14 +3,19 @@ import { AddShoppingCart } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../store/products';
-import { addProduct } from '../store/openOrder';
+import { fetchOrder,addProduct } from '../store/openOrder';
 
 class AllProducts extends Component {
   componentDidMount() {
     this.props.fetchProducts();
+    this.props.loadOpenOrder()
   }
 
+<<<<<<< Updated upstream
   render() {
+=======
+	render() {
+>>>>>>> Stashed changes
     const products = this.props.products || [];
     return (
       <div className="container">
@@ -28,7 +33,11 @@ class AllProducts extends Component {
                   type={product.id}
                   onClick={() => {
                     this.props.addProduct(product.id);
+<<<<<<< Updated upstream
                     window.location.reload();
+=======
+                    //window.location.reload();
+>>>>>>> Stashed changes
                   }}
                 >
                   Add to Cart
@@ -44,11 +53,18 @@ class AllProducts extends Component {
 
 const mapState = (state) => ({
   products: state.products,
+  openOrder: state.openOrder
 });
 
 const mapDispatch = (dispatch) => ({
+<<<<<<< Updated upstream
   fetchProducts: () => dispatch(fetchProducts()),
   addProduct: (productId) => dispatch(addProduct(productId)),
+=======
+	fetchProducts: () => dispatch(fetchProducts()),
+	addProduct: (productId) => dispatch(addProduct(productId)),
+  loadOpenOrder: () => dispatch(fetchOrder()),
+>>>>>>> Stashed changes
 });
 
 export default connect(mapState, mapDispatch)(AllProducts);
