@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { logout } from '../store';
 import Button from 'react-bootstrap/Button';
 
-const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
+const Navbar = ({ handleClick, isLoggedIn, isAdmin, openOrder }) => (
   <div className="header-container">
     <div className="header-container-left">
       <Link to="/">
@@ -18,6 +18,11 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
             className="cart-button-img"
             src="https://image.flaticon.com/icons/png/512/34/34627.png"
           />
+          {openOrder.products === undefined
+            ? ''
+            : `(${openOrder.products
+                .map((items) => parseInt(items.Cart_Item.quantity, 10))
+                .reduce((prev, curr) => prev + curr, 0)})`}
         </Button>
       </Link>
       {isLoggedIn ? (
@@ -65,6 +70,7 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
     isAdmin: state.auth.isAdmin,
+    openOrder: state.openOrder,
   };
 };
 
