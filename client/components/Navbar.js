@@ -8,7 +8,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div className="header-container">
     <div className="header-container-left">
       <Link to="/">
-        <h2 className="duckeye-title">Duckeye Cat Supplies</h2>
+        <h2 className="duckeye-title">Duckeye Emporium</h2>
       </Link>
     </div>
     <nav className="header-container-right">

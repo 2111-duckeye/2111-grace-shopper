@@ -23,6 +23,7 @@ class OrderPage extends React.Component {
   handleSelect(evt) {
     this.props.addProduct(evt.target.id, evt.target.value)
     this.setState({updatedOrder: true})
+
   }
 
   componentDidMount() {
@@ -178,8 +179,6 @@ class OrderPage extends React.Component {
                       <button className='checkout' type='checkout' onClick={() => this.props.checkout(openOrder)}>Checkout</button>
                     ) : ''
                   }
-
-
                 </div>
               ) : <h1>Loading</h1>
             }
