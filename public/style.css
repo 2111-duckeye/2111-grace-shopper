@@ -59,6 +59,7 @@ body {
 .right-column {
   width: 35%;
   margin-top: 60px;
+  margin-left: auto;
 }
 
 /* Left Column */
